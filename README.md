@@ -4,7 +4,11 @@
 Entidades: 
 - Tabla Películas: id, título, género, año, director, actores, sinopsis, duración, calidad.
 - Tabla Usuarios: id, nombre, email, contraseña, historial_visualizacion.
-- Tabla Listas_Reproducción: id, usuario_id, nombre, contenido (relación muchos a muchos con películas y series)
+- Tabla Horarios: id, inicio, fin, duracion.
+- Tabla Localizacion: id, direccion.
+- Tabla APP: id, descripcion.
+- Tabla Listado_Disponible_Por_Zona: id, usuario_id, nombre, contenido (relación muchos a muchos con películas y localización)
+- Tabla Listado_Disponible_Por_Horario: id, usuario_id, nombre, contenido (relación muchos a muchos con películas y horario)
 
 Operaciones:
 - Permitir a los usuarios buscar contenido por título, género, actor, director.
