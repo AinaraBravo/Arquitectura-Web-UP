@@ -10,7 +10,7 @@ Entidades:
 Operaciones:
 - Permitir a los usuarios buscar contenido por título, género, actor, director.
 - Recomendar contenido al usuario.
-- Generar estadísticas de visualización.
+- Permitir a los usuarios conocer donde se encuentran disponibles las peliculas (presencial y/o online).
 
 Manejo de los objetos con protocolo HTTP:
  - GET: Obtener un recurso específico.
