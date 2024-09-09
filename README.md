@@ -1,7 +1,6 @@
 # Arquitectura-Web-UP
 
-## Sistema de Gestión de un Servicio de Peliculas:
-
+## Sistema de Gestión de un Servicio de Peliculas 🍿
 Entidades: 
 - Tabla Películas: id, título, género, año, director, actores, sinopsis, duración, calidad.
 - Tabla Usuarios: id, nombre, email, contraseña, historial_visualizacion.
