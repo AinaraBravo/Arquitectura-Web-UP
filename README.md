@@ -11,7 +11,7 @@ Operaciones:
 - Recomendar contenido al usuario.
 - Generar estadísticas de visualización.
 
-Manejo de los objetos:
+Manejo de los objetos con protocolo HTTP:
 - GET / API / Peliculas
 - POST / API / Peliculas
 - DELETE / API / Peliculas / {ID}
