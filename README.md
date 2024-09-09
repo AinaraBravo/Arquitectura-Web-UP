@@ -13,7 +13,7 @@ Operaciones:
 - Generar estadísticas de visualización.
 
 Manejo de los objetos con protocolo HTTP:
- - GET: Solicitar una representación de un recurso específico.
+ - GET: Obtener un recurso específico.
 Ejemplo: /API/Peliculas devolvería una lista de todas las películas disponibles.
 
 - POST: Crear un nuevo recurso.
