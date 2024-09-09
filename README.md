@@ -11,11 +11,11 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
 - Perfiles de Usuario: Cada usuario tendrá un perfil personalizado donde podrá gestionar sus listas, ver su historial y ajustar sus preferencias.
 
 ## Entidades  
-- Tabla Películas: id, título, género, año, director, actores, sinopsis, duración, calidad.
-- Tabla Usuarios: id, nombre, email, contraseña, historial_visualizacion.
-- Tabla Horarios: id, inicio, fin, duracion.
+- Tabla Película: id, título, género, año, director, actores, sinopsis, duración, calidad.
+- Tabla Usuario: id, nombre, email, contraseña, historial_visualizacion.
+- Tabla Horario: id, inicio, fin, duracion.
 - Tabla Localizacion: id, direccion.
-- Tabla Plataforma Online: id, nombre.
+- Tabla Plataforma_Online: id, nombre.
 - Tabla Listado_Disponible_Por_Zona: id, usuario_id, nombre, contenido (relación muchos a muchos con películas y localización).
 - Tabla Listado_Disponible_Por_Horario: id, usuario_id, nombre, contenido (relación muchos a muchos con películas y horario).
 - Tabla Listado_Disponible_Por_Plataforma: id, usuario_id, nombre, contenido (relación muchos a muchos con películas y plataforma).
