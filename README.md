@@ -11,4 +11,3 @@ Operaciones:
 - Permitir a los usuarios buscar contenido por título, género, actor, director.
 - Recomendar contenido al usuario.
 - Generar estadísticas de visualización.
-- Gestionar los derechos de autor.
