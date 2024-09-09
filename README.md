@@ -6,9 +6,10 @@ Entidades:
 - Tabla Usuarios: id, nombre, email, contraseña, historial_visualizacion.
 - Tabla Horarios: id, inicio, fin, duracion.
 - Tabla Localizacion: id, direccion.
-- Tabla APP: id, descripcion.
-- Tabla Listado_Disponible_Por_Zona: id, usuario_id, nombre, contenido (relación muchos a muchos con películas y localización)
-- Tabla Listado_Disponible_Por_Horario: id, usuario_id, nombre, contenido (relación muchos a muchos con películas y horario)
+- Tabla Plataforma Online: id, nombre.
+- Tabla Listado_Disponible_Por_Zona: id, usuario_id, nombre, contenido (relación muchos a muchos con películas y localización).
+- Tabla Listado_Disponible_Por_Horario: id, usuario_id, nombre, contenido (relación muchos a muchos con películas y horario).
+- Tabla Listado_Disponible_Por_Plataforma: id, usuario_id, nombre, contenido (relación muchos a muchos con películas y plataforma).
 
 Operaciones:
 - Permitir a los usuarios buscar contenido por título, género, actor, director.
