@@ -1,4 +1,4 @@
-![Texto alternativo](https://www.google.com/url?sa=i&url=https%3A%2F%2Fmedya-audiovisual.com%2Fedicion-de-video-profesional-importancia-para-transmitir-seriedad%2F&psig=AOvVaw2ThkRcmZUd0jGodXOZuzZe&ust=1726012311308000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNim0I6Ht4gDFQAAAAAdAAAAABAJ)
+!(https://www.google.com/url?sa=i&url=https%3A%2F%2Fmedya-audiovisual.com%2Fedicion-de-video-profesional-importancia-para-transmitir-seriedad%2F&psig=AOvVaw2ThkRcmZUd0jGodXOZuzZe&ust=1726012311308000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNim0I6Ht4gDFQAAAAAdAAAAABAJ)
 
 # Sistema de Gestión de Peliculas 🍿
 ## Descripción del Sistema
