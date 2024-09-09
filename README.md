@@ -44,3 +44,9 @@ La página web podría tener las siguientes secciones principales:
 - Detalle de película: Una página dedicada a cada película con toda la información relevante, trailers, críticas y opciones para verla.
 - Explorar: Secciones para explorar películas por género, director, actor, etc.
 - Listados: Donde los usuarios pueden ver sus listas personalizadas y crear nuevas.
+
+## Consideraciones Adicionales
+Integración con APIs de terceros: Para obtener información de películas de bases de datos externas (e.g., TMDB) y actualizar automáticamente la información.
+Sistema de calificaciones y reseñas: Permitir a los usuarios calificar y comentar las películas.
+Notificaciones: Avisar a los usuarios sobre nuevas películas, estrenos y recomendaciones personalizadas.
+Integración con redes sociales: Permitir a los usuarios compartir sus listas y descubrimientos con sus amigos.
