@@ -23,13 +23,13 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
 
 ## Manejo de los objetos con protocolo HTTP
  - GET: Obtener un recurso específico.
-Ejemplo: /API/Peliculas devolvería una lista de todas las películas disponibles.
-Ejemplo: /API/Horarios devolvería una lista de todos los horarios disponibles.
-Ejemplo: /API/Salas_De_Cine devolvería una lista de todas las salas de cines disponibles.
-Ejemplo: /API/Plataformas_Online devolvería una lista de todas las plataformas disponibles.
+  - Ejemplo: /API/Peliculas devolvería una lista de todas las películas disponibles.
+  - Ejemplo: /API/Horarios devolvería una lista de todos los horarios disponibles.
+  - Ejemplo: /API/Salas_De_Cine devolvería una lista de todas las salas de cines disponibles.
+  - Ejemplo: /API/Plataformas_Online devolvería una lista de todas las plataformas disponibles.
 
 - POST: Crear un nuevo recurso.
-Ejemplo: Enviar un objeto JSON con los datos de una nueva película a /API/Peliculas para agregarla a la base de datos.
+  - Ejemplo: Enviar un objeto JSON con los datos de una nueva película a /API/Peliculas para agregarla a la base de datos.
 
 - DELETE: Eliminar un recurso existente.
 Ejemplo: Eliminar la película con el ID 123: /API/Peliculas/123.
