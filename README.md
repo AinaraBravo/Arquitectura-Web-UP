@@ -1,5 +1,3 @@
-![](https://www.google.com/url?sa=i&url=https%3A%2F%2Fmedya-audiovisual.com%2Fedicion-de-video-profesional-importancia-para-transmitir-seriedad%2F&psig=AOvVaw2ThkRcmZUd0jGodXOZuzZe&ust=1726012311308000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNim0I6Ht4gDFQAAAAAdAAAAABAJ)
-
 # Sistema de Gestión de Peliculas 🍿
 ## Descripción del Sistema
 Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia completa y personalizada en la búsqueda y descubrimiento de películas. Combinando información detallada sobre películas con funcionalidades de recomendación y búsqueda avanzada.
@@ -16,16 +14,19 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
 - Tabla Película: id, título, género, año, director, actores, sinopsis, duración, calidad.
 - Tabla Usuario: id, nombre, email, contraseña, historial_visualizacion.
 - Tabla Horario: id, inicio, fin, duracion.
-- Tabla Localizacion: id, direccion.
+- Tabla Sala_De_Cine: id, direccion.
 - Tabla Plataforma_Online: id, nombre.
-- Tabla Listado_Disponible_Por_Zona: id, usuario_id, nombre, contenido (relación muchos a muchos con películas y localización).
-- Tabla Listado_Disponible_Por_Horario: id, usuario_id, nombre, contenido (relación muchos a muchos con películas y horario).
-- Tabla Listado_Disponible_Por_Plataforma: id, usuario_id, nombre, contenido (relación muchos a muchos con películas y plataforma).
+- Tabla Listado_Disponible_Por_Sala_De_Cine: id, sala_id, nombre, contenido (relación muchos a muchos con películas y localización).
+- Tabla Listado_Disponible_Por_Horario: id, horario_id, nombre, contenido (relación muchos a muchos con películas y horario).
+- Tabla Listado_Disponible_Por_Plataforma: id, plataforma_id, nombre, contenido (relación muchos a muchos con películas y plataforma).
 
 
 ## Manejo de los objetos con protocolo HTTP
  - GET: Obtener un recurso específico.
 Ejemplo: /API/Peliculas devolvería una lista de todas las películas disponibles.
+Ejemplo: /API/Horarios devolvería una lista de todos los horarios disponibles.
+Ejemplo: /API/Salas_De_Cine devolvería una lista de todas las salas de cines disponibles.
+Ejemplo: /API/Plataformas_Online devolvería una lista de todas las plataformas disponibles.
 
 - POST: Crear un nuevo recurso.
 Ejemplo: Enviar un objeto JSON con los datos de una nueva película a /API/Peliculas para agregarla a la base de datos.
