@@ -14,19 +14,19 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
 Entidades 
 - Película: Contiene información que es fundamental para la búsqueda y recomendación.
   - Atributos: id_pelicula, título, género, año, director, actores, sinopsis, duración, calidad.
-- Usuario: Guarda la información del usuario, incluyendo su historial de visualización que será clave para las recomendaciones personalizadas.
+- Usuario: Contiene información del usuario, incluyendo su historial de visualización que será clave para las recomendaciones personalizadas.
   - Atributos: id_usuario, nombre, email, contraseña, historial_visualizacion.
-- Horario: Define los horarios de proyección en las salas de cine.
+- Horario: Contiene los horarios de proyección en las salas de cine.
   - Atributos: id_horario, inicio, fin, duracion.
-- Sala_De_Cine: Almacena la información geográfica de las salas.
+- Sala_De_Cine: Contiene la información geográfica de las salas.
   - Atributos: id_sala_de_cine, direccion.
 - Plataforma_Online: Contiene el nombre de cada plataforma de streaming.
   - Atributos: id_plataforma_online, nombre.
-- Proyección: Representará una instancia específica de una película en un lugar y horario determinado.
+- Proyección: Representa una instancia específica de una película en un lugar y horario determinado.
   - Atributos: id, película_id, sala_de_cine_id, horario_id, plataforma_online_id (puede ser nulo si es una proyección en cine).
 
 Relaciones
-- Listado_Disponible_Por_*: Estas tres tablas intermediarias están intentando modelar una relación muchos a muchos entre Película y las otras entidades (Sala_De_Cine, Horario, Plataforma_Online). Sin embargo, la columna "contenido" parece redundante y podría causar problemas de consistencia.
+- Listado_Disponible_Por_*: Estas tres tablas intermediarias están intentando modelar una relación muchos a muchos entre Película y las otras entidades (Sala_De_Cine, Horario, Plataforma_Online). 
 - Película - Proyección: Una película puede tener muchas proyecciones (relación uno a muchos).
 - Sala_De_Cine - Proyección: Una sala de cine puede tener muchas proyecciones (relación uno a muchos).
 - Horario - Proyección: Un horario puede asociarse a muchas proyecciones (relación uno a muchos).
