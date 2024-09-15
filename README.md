@@ -1,4 +1,4 @@
-![hotel]([[https://rockonrr.com/wp-content/uploads/2021/02/Booking-Appointment.png](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4i42jdws8QMac7gl5lORANCsgfvwm6qlrlQ&s)](https://www.freepik.es/vector-premium/personas-que-reservan-boletos-cine-cine-movil-hombre-viendo-cine-linea-cubo-palomitas-maiz-gafas-3d-tira-pelicula-camara-cinematografia-produccion-peliculas-anuncio-estreno_55108747.htm))
+![hotel](https://static.vecteezy.com/system/resources/previews/017/549/409/non_2x/watching-movies-in-cinema-or-home-online-vector.jpg)
 
 # Sistema de Gestión de Peliculas 🍿
 ## Descripción del Sistema
