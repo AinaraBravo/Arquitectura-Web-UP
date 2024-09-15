@@ -3,23 +3,34 @@
 Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia completa y personalizada en la búsqueda y descubrimiento de películas, combinando información detallada sobre películas con funcionalidades de recomendación y búsqueda avanzada. Además, el sistema permite a los usuarios conocer la disponibilidad de las películas, indicando dónde y cuándo pueden disfrutarlas, ya sea desde la comodidad de su casa o bien en la gran pantalla.
 
 ## Cuales son sus funciones clave
-- Búsqueda Avanzada: Los usuarios podrán buscar películas por título, género, actores, directores y otros criterios.
+- Búsqueda Avanzada: Cada usuario podrá buscar películas por título, género, actores, directores y otros criterios.
 - Recomendaciones Personalizadas: El sistema sugerirá películas basadas en el historial de visualización del usuario, géneros preferidos y otros factores.
 - Información Detallada: Se proporcionará información completa sobre cada película, incluyendo sinopsis, reparto, críticas y calificaciones.
 - Disponibilidad: Los usuarios podrán conocer dónde y cuándo pueden ver una película específica, tanto en salas de cine como en plataformas de streaming.
 - Listas Personalizadas: Los usuarios podrán crear listas de películas favoritas, pendientes de ver, etc.
 - Perfiles de Usuario: Cada usuario tendrá un perfil personalizado donde podrá gestionar sus listas, ver su historial y ajustar sus preferencias.
 
-## Entidades  
-- Tabla Película: id, título, género, año, director, actores, sinopsis, duración, calidad.
-- Tabla Usuario: id, nombre, email, contraseña, historial_visualizacion.
-- Tabla Horario: id, inicio, fin, duracion.
-- Tabla Sala_De_Cine: id, direccion.
-- Tabla Plataforma_Online: id, nombre.
-- Tabla Listado_Disponible_Por_Sala_De_Cine: id, sala_id, nombre, contenido (relación muchos a muchos con películas y localización).
-- Tabla Listado_Disponible_Por_Horario: id, horario_id, nombre, contenido (relación muchos a muchos con películas y horario).
-- Tabla Listado_Disponible_Por_Plataforma: id, plataforma_id, nombre, contenido (relación muchos a muchos con películas y plataforma).
+## Entidades y Relaciones
+Entidades 
+- Película: Contiene información que es fundamental para la búsqueda y recomendación.
+  - Atributos: id_pelicula, título, género, año, director, actores, sinopsis, duración, calidad.
+- Usuario: Guarda la información del usuario, incluyendo su historial de visualización que será clave para las recomendaciones personalizadas.
+  - Atributos: id_usuario, nombre, email, contraseña, historial_visualizacion.
+- Horario: Define los horarios de proyección en las salas de cine.
+  - Atributos: id_horario, inicio, fin, duracion.
+- Sala_De_Cine: Almacena la información geográfica de las salas.
+  - Atributos: id_sala_de_cine, direccion.
+- Plataforma_Online: Contiene el nombre de cada plataforma de streaming.
+  - Atributos: id_plataforma_online, nombre.
+- Proyección: Representará una instancia específica de una película en un lugar y horario determinado.
+  - Atributos: id, película_id, sala_de_cine_id, horario_id, plataforma_online_id (puede ser nulo si es una proyección en cine).
 
+Relaciones
+- Listado_Disponible_Por_*: Estas tres tablas intermediarias están intentando modelar una relación muchos a muchos entre Película y las otras entidades (Sala_De_Cine, Horario, Plataforma_Online). Sin embargo, la columna "contenido" parece redundante y podría causar problemas de consistencia.
+- Película - Proyección: Una película puede tener muchas proyecciones (relación uno a muchos).
+- Sala_De_Cine - Proyección: Una sala de cine puede tener muchas proyecciones (relación uno a muchos).
+- Horario - Proyección: Un horario puede asociarse a muchas proyecciones (relación uno a muchos).
+- Plataforma_Online - Proyección: Una plataforma puede tener muchas proyecciones (relación uno a muchos).
 
 ## Manejo de los objetos con protocolo HTTP
 - GET: Obtener un recurso específico.
