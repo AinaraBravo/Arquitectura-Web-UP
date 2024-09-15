@@ -1,6 +1,6 @@
 # Sistema de Gestión de Peliculas 🍿
 ## Descripción del Sistema
-Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia completa y personalizada en la búsqueda y descubrimiento de películas. Combinando información detallada sobre películas con funcionalidades de recomendación y búsqueda avanzada.
+Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia completa y personalizada en la búsqueda y descubrimiento de películas, combinando información detallada sobre películas con funcionalidades de recomendación y búsqueda avanzada. Además, el sistema permite a los usuarios conocer la disponibilidad de las películas, indicando dónde y cuándo pueden disfrutarlas, ya sea desde la comodidad de su casa o bien en la gran pantalla.
 
 ## Cuales son sus funciones clave
 - Búsqueda Avanzada: Los usuarios podrán buscar películas por título, género, actores, directores y otros criterios.
