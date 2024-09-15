@@ -1,4 +1,4 @@
-![hotel](https://static.vecteezy.com/system/resources/previews/017/549/409/non_2x/watching-movies-in-cinema-or-home-online-vector.jpg)
+![hotel]([https://static.vecteezy.com/system/resources/previews/017/549/409/non_2x/watching-movies-in-cinema-or-home-online-vector.jpg](https://www.cronista.com/files/image/703/703805/6548e81537f93.jpg))
 
 # Sistema de Gestión de Peliculas 🍿
 ## Descripción del Sistema
