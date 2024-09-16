@@ -62,7 +62,7 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
    - Cuerpo: id_pelicula
    - Código de estado:
 4. Calificar una pelicula:
-    -Endpoint:/API/Peliculas/{id}/calificar
+   - Endpoint:/API/Peliculas/{id}/calificar
    - Método: POST
    - Código de estado: Si la calificación se crea correctamente, el servidor debería devolver un código de estado 201 (Created).
      
