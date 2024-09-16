@@ -57,6 +57,7 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
       {
         "error": "El campo 'contraseña' es obligatorio"
       }
+
 2. Actualizar la información de un usuario:
    - Endpoint: /API/Usuarios/{id_usuario}
    - Método: PUT
@@ -65,7 +66,17 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
       - 404 Not Found: Si no se encuentra el usuario con el ID especificado.
 400 Bad Request: Si hay algún error de validación.
       - 500 Internal Server Error: Si ocurre un error interno en el servidor.
-        
+   - Respuesta:
+     * *Respuesta exitosa (200 OK)* *
+      {
+        "message": "Usuario actualizado correctamente"
+      }
+      
+     * *Respuesta de error (404 Not Found)* *
+      {
+        "error": "Usuario no encontrado"
+      }
+
 3. Iniciar sesión:
    - Endpoint: /API/Usuarios/login
    - Método: POST
@@ -75,7 +86,17 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
       - 401 Unauthorized: Si las credenciales son incorrectas.
       - 400 Bad Request: Si faltan datos o hay algún error de validación.
       - 500 Internal Server Error: Si ocurre un error interno en el servidor.
+   - Respuesta:
+     * *Respuesta exitosa (200 OK)* *
+      {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTYiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.4fg63hI0ATyT2LrgwIljN5v6uQBFOk"
+      }
 
+     * *Respuesta de error (401 Unauthorized)* *
+      {
+        "error": "Credenciales inválidas"
+    
+      }
 4. Recuperar contraseña:
    - Endpoint: /API/Usuarios/recuperar_contrasena
    - Método: POST
@@ -94,6 +115,16 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
         - 200 OK: La película se encontró y se devolvieron sus detalles.
         - 404 Not Found: La película con el ID especificado no existe.
         - 500 Internal Server Error: Ocurrió un error interno en el servidor al intentar obtener los datos.
+    - Respuesta:
+      * *Respuesta exitosa (200 OK)* *
+      {
+        "id": 1,
+        "titulo": "El Padrino",
+        "genero": "Drama",
+        "director": "Francis Ford Coppola",
+        // ... otros campos
+      }
+
 2. Buscar una película por género:
     - Endpoint: /API/Peliculas?genero={genero}
     - Método: GET
@@ -101,6 +132,21 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
         - 200 OK: Se encontró al menos una película del género especificado y se devolvió una lista.
         - 404 Not Found: No se encontraron películas del género especificado.
         - 500 Internal Server Error: Ocurrió un error interno en el servidor al realizar la búsqueda.
+    - Respuesta:
+      * *Respuesta exitosa (200 OK)* *
+      [
+        {
+          "id": 1,
+          "titulo": "El Padrino",
+          "genero": "Drama"
+        },
+        {
+          "id": 2,
+          "titulo": "El bueno, el feo y el malo",
+          "genero": "Western"
+        }
+      ]
+
 3. Agregar una película a la lista de favoritos de un usuario:
     - Endpoint: /API/Usuarios/{id}/favoritos
     - Método: POST
@@ -110,6 +156,12 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
         - 404 Not Found: El usuario o la película no existen.
         - 400 Bad Request: La película ya está en la lista de favoritos.
         - 500 Internal Server Error: Ocurrió un error interno al agregar la película a la lista de favoritos.
+    - Respuesta:
+      * *Respuesta exitosa (201 Created)* *
+      {
+        "message": "Película agregada a favoritos"
+      }
+
 4. Calificar una película:
     - Endpoint: /API/Peliculas/{id}/calificar
     - Método: POST
@@ -120,6 +172,12 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
         - 400 Bad Request: La calificación no es válida (por ejemplo, fuera de rango).
         - 409 Conflict: El usuario ya ha calificado esta película.
         - 500 Internal Server Error: Ocurrió un error interno al registrar la calificación.
+    - Respuesta:
+      * *Respuesta exitosa (200 OK)* *
+      {
+        "message": "Calificación registrada"
+      }
+
 5. Obtener recomendaciones de una película:
     - Endpoint: /API/Peliculas/recomendaciones
     - Método: GET
@@ -127,6 +185,16 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
         - 200 OK: Se devolvió una lista de películas recomendadas.
         - 404 Not Found: No se encontraron recomendaciones.
         - 500 Internal Server Error: Ocurrió un error interno al generar las recomendaciones.
+    - Respuesta:
+      * *Respuesta exitosa (200 OK)* *
+      [
+        {
+          "id": 3,
+          "titulo": "Pulp Fiction",
+          "genero": "Crimen"
+        },
+        // ... otras recomendaciones
+      ]
      
 ### Gestión de horarios y salas
 1. Obtener las salas de cine cercanas a una ubicación:
@@ -136,6 +204,20 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
         - 200 OK: Se encontró al menos una sala de cine cerca de la ubicación especificada y se devolvió una lista.
         - 404 Not Found: No se encontraron salas de cine cerca de la ubicación especificada.
         - 500 Internal Server Error: Ocurrió un error interno en el servidor al realizar la búsqueda.
+    - Respuesta:
+      * *Respuesta exitosa (200 OK)* *
+      [
+        {
+          "id": 1,
+          "nombre": "Cinepolis",
+          "direccion": "Avenida Siempreviva 123",
+          "latitud": -33.4167,
+          "longitud": -70.6167,
+          "distancia": 1.5 // En kilómetros
+        },
+        // ... otras salas
+      ]
+
 2. Obtener horarios de una película en una sala de cine:
     - Endpoint: /API/Peliculas/{id_pelicula}/Horarios
     - Método: GET
@@ -143,7 +225,20 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
         - 200 OK: Se encontraron horarios disponibles para la película en la sala de cine especificada.
         - 404 Not Found: La película o la sala de cine no existen, o no hay horarios disponibles para esa película en esa sala.
         - 500 Internal Server Error: Ocurrió un error interno en el servidor al obtener los horarios.
-     
+    - Respuesta:
+      * *Respuesta exitosa (200 OK)* *
+      [
+        {
+          "id": 1,
+          "nombre": "Cinepolis",
+          "direccion": "Avenida Siempreviva 123",
+          "latitud": -33.4167,
+          "longitud": -70.6167,
+          "distancia": 1.5 // En kilómetros
+        },
+        // ... otras salas
+      ]
+
 ### Administración
 1. Agregar una película:
     - Endpoint: /API/Peliculas
