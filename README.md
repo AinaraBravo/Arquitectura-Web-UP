@@ -88,15 +88,15 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
       - 500 Internal Server Error: Si ocurre un error interno en el servidor.
    - Respuesta:
      * *Respuesta exitosa (200 OK)* *
-      {
-        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTYiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.4fg63hI0ATyT2LrgwIljN5v6uQBFOk"
-      }
+        {
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTYiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.4fg63hI0ATyT2LrgwIljN5v6uQBFOk"
+        }
 
      * *Respuesta de error (401 Unauthorized)* *
-      {
-        "error": "Credenciales inválidas"
-    
-      }
+        {
+          "error": "Credenciales inválidas"
+      
+        }
 4. Recuperar contraseña:
    - Endpoint: /API/Usuarios/recuperar_contrasena
    - Método: POST
