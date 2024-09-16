@@ -1,4 +1,4 @@
-![cine](https://c0.klipartz.com/pngpicture/1015/219/sticker-png-github-computer-software-node-js-github-inc-microsoft-fork-nodejs-git.png)
+![cine](https://kinsta.com/es/wp-content/uploads/sites/8/2023/07/how-to-push-code-to-github.jpg)
 
 # Sistema de Gestión de Peliculas 
 ## Descripción de la página web 🍿
