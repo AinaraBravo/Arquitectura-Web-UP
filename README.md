@@ -36,6 +36,7 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
 
 ## Manejo de los objetos con protocolo HTTP 🌐
 ### Gestión de usuarios
+
 1. Crear un nuevo usuario:
    - Endpoint: /API/Usuarios
    - Método: POST
@@ -44,21 +45,36 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
       - 201 Created: Si el usuario se crea correctamente.
       - 400 Bad Request: Si faltan datos o hay algún error de validación (por ejemplo, email ya existe).
       - 500 Internal Server Error: Si ocurre un error interno en el servidor.
+        
 2. Actualizar la información de un usuario:
    - Endpoint: /API/Usuarios/{id_usuario}
    - Método: PUT
    - Código de estado:
+      - 200 OK: Si la información del usuario se actualiza correctamente.
+      - 404 Not Found: Si no se encuentra el usuario con el ID especificado.
+400 Bad Request: Si hay algún error de validación.
+      - 500 Internal Server Error: Si ocurre un error interno en el servidor.
+        
 3. Iniciar sesión:
    - Endpoint: /API/Usuarios/login
    - Método: POST
    - Cuerpo: email, contrasenia
    - Código de estado:
+      - 200 OK: Si las credenciales son válidas y se genera un token de autenticación.
+      - 401 Unauthorized: Si las credenciales son incorrectas.
+      - 400 Bad Request: Si faltan datos o hay algún error de validación.
+      - 500 Internal Server Error: Si ocurre un error interno en el servidor.
+
 4. Recuperar contraseña:
    - Endpoint: /API/Usuarios/recuperar_contrasena
    - Método: POST
    - Cuerpo: email
-   - Código de estado: 
-     
+   - Código de estado:
+      - 200 OK: Si se envía un correo electrónico con las instrucciones para restablecer la contraseña.
+      - 404 Not Found: Si no se encuentra el usuario con el email especificado.
+      - 400 Bad Request: Si el formato del email es inválido.
+      - 500 Internal Server Error: Si ocurre un error interno en el servidor.
+      - 
 ### Gestión de peliculas
 1. Obtener detalles de una pelicula:
    - Endpoint: /API/Peliculas/{id_pelicula}
