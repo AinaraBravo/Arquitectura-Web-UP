@@ -76,57 +76,88 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
       - 500 Internal Server Error: Si ocurre un error interno en el servidor.
         
 ### Gestión de peliculas
-1. Obtener detalles de una pelicula:
-   - Endpoint: /API/Peliculas/{id_pelicula}
-   - Método: GET
-   - Código de estado:
-     
-2. Buscar una pelicula por genero:
-   - Endpoint: /API/Peliculas?genero={genero}
-   - Método: GET
-   - Código de estado:
-     
-3. Agregar una pelicula a la lista de favoritos de un usuario:
-   - Endpoint: /API/Usuarios/{id}/favoritos
-   - Método: POST
-   - Cuerpo: id_pelicula
-   - Código de estado:
-     
-4. Calificar una pelicula:
-   - Endpoint:/API/Peliculas/{id}/calificar
-   - Método: POST
-   - Cuerpo: calificacion
-   - Código de estado:
-     
-5. Obtener recomendaciones de una pelicula:
-   - Endpoint: /API/Peliculas/recomendaciones
-   - Método: GET
-   - Código de estado:
+1. Obtener detalles de una película:
+  - Endpoint: /API/Peliculas/{id_pelicula}
+  - Método: GET
+  - Códigos de estado:
+      - 200 OK: La película se encontró y se devolvieron sus detalles.
+      - 404 Not Found: La película con el ID especificado no existe.
+      - 500 Internal Server Error: Ocurrió un error interno en el servidor al intentar obtener los datos.
+2. Buscar una película por género:
+  - Endpoint: /API/Peliculas?genero={genero}
+  - Método: GET
+  - Códigos de estado:
+      - 200 OK: Se encontró al menos una película del género especificado y se devolvió una lista.
+      - 404 Not Found: No se encontraron películas del género especificado.
+      - 500 Internal Server Error: Ocurrió un error interno en el servidor al realizar la búsqueda.
+3. Agregar una película a la lista de favoritos de un usuario:
+  - Endpoint: /API/Usuarios/{id}/favoritos
+  - Método: POST
+  - Cuerpo: id_pelicula
+  - Códigos de estado:
+      - 201 Created: La película se agregó correctamente a la lista de favoritos.
+      - 404 Not Found: El usuario o la película no existen.
+      - 400 Bad Request: La película ya está en la lista de favoritos.
+      - 500 Internal Server Error: Ocurrió un error interno al agregar la película a la lista de favoritos.
+4. Calificar una película:
+  - Endpoint: /API/Peliculas/{id}/calificar
+  - Método: POST
+  - Cuerpo: calificacion
+  - Códigos de estado:
+      - 200 OK: La calificación se registró correctamente.
+      - 404 Not Found: La película no existe.
+      - 400 Bad Request: La calificación no es válida (por ejemplo, fuera de rango).
+      - 409 Conflict: El usuario ya ha calificado esta película.
+      - 500 Internal Server Error: Ocurrió un error interno al registrar la calificación.
+5. Obtener recomendaciones de una película:
+  - Endpoint: /API/Peliculas/recomendaciones
+  - Método: GET
+  - Códigos de estado:
+      - 200 OK: Se devolvió una lista de películas recomendadas.
+      - 404 Not Found: No se encontraron recomendaciones.
+      - 500 Internal Server Error: Ocurrió un error interno al generar las recomendaciones.
      
 ### Gestión de horarios y salas
 1. Obtener las salas de cine cercanas a una ubicación:
-   - Endpoint:/API/Salas_De_Cine?latitud={lat}&longitud={lon}
-   - Método: GET
-   - Código de estado: 
-2. Obtener horarios de una pelicula en una sala de cine:
-   - Endpoint: /API/Peliculas/{id_pelicula}/Horarios
-   - Método: GET
-   - Código de estado:
+  - Endpoint: /API/Salas_De_Cine?latitud={lat}&longitud={lon}
+  - Método: GET
+  - Códigos de estado:
+      - 200 OK: Se encontró al menos una sala de cine cerca de la ubicación especificada y se devolvió una lista.
+      - 404 Not Found: No se encontraron salas de cine cerca de la ubicación especificada.
+      - 500 Internal Server Error: Ocurrió un error interno en el servidor al realizar la búsqueda.
+2. Obtener horarios de una película en una sala de cine:
+  - Endpoint: /API/Peliculas/{id_pelicula}/Horarios
+  - Método: GET
+  - Códigos de estado:
+      - 200 OK: Se encontraron horarios disponibles para la película en la sala de cine especificada.
+      - 404 Not Found: La película o la sala de cine no existen, o no hay horarios disponibles para esa película en esa sala.
+      - 500 Internal Server Error: Ocurrió un error interno en el servidor al obtener los horarios.
      
 ### Administración
-1. Agregar una pelicula:
-   - Endpoint: /API/Peliculas
-   - Método: POST
-   - Cuerpo: título, genero, año, director, actores, sinopsis, duración.
-   - Código de estado:
-2. Eliminar una pelicula:
-   - Endpoint:/API/Peliculas/{id_peliculas}
-   - Método: DELETE
-   - Código de estado:
+1. Agregar una película:
+  - Endpoint: /API/Peliculas
+  - Método: POST
+  - Cuerpo: título, género, año, director, actores, sinopsis, duración.
+  - Códigos de estado:
+      - 201 Created: La película se creó correctamente.
+      - 400 Bad Request: Faltan datos obligatorios o hay un formato incorrecto.
+      - 409 Conflict: Ya existe una película con el mismo título.
+      - 500 Internal Server Error: Ocurrió un error interno en el servidor.
+2. Eliminar una película:
+  - Endpoint: /API/Peliculas/{id_peliculas}
+  - Método: DELETE
+  - Códigos de estado:
+      - 204 No Content: La película se eliminó correctamente (no se devuelve cuerpo en la respuesta).
+      - 404 Not Found: La película con el ID especificado no existe.
+      - 403 Forbidden: El usuario no tiene permisos para eliminar la película.
+      - 500 Internal Server Error: Ocurrió un error interno en el servidor.
 3. Obtener el historial de visualizaciones de un usuario:
-    - Endpoint: /API/Usuarios/{id}/historial
-    - Método: GET
-    - Código de estado:
+  - Endpoint: /API/Usuarios/{id}/historial
+  - Método: GET
+  - Códigos de estado:
+      - 200 OK: Se devolvió el historial de visualizaciones del usuario.
+      - 404 Not Found: El usuario con el ID especificado no existe.
+      - 500 Internal Server Error: Ocurrió un error interno al obtener el historial.
       
 ### Social
 1. Compartir en redes sociales:
@@ -142,15 +173,28 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
     - Endpoint: /API/Usuarios/{id_usuario}/suscripciones
     - Método: POST
     - Código de estado:
+        - 201 Created: La suscripción se creó correctamente.
+        - 400 Bad Request: Si falta algún dato en la solicitud o si el formato es incorrecto.
+        - 404 Not Found: El usuario no existe.
+        - 409 Conflict: Ya existe una suscripción con las mismas características.
+        - 500 Internal Server Error: Si ocurre un error interno al crear la suscripción.
 2. Eliminar una suscripcion:
     - Endpoint: /API/Usuarios/{id_usuario}/suscripciones/{id_suscripcion}
     - Método: DELETE
     - Código de estado:
+        - 204 No Content: La suscripción se eliminó correctamente.
+        - 404 Not Found: La suscripción o el usuario no existen.
+        - 403 Forbidden: El usuario no tiene permisos para eliminar la suscripción.
+        - 500 Internal Server Error: Si ocurre un error interno al eliminar la suscripción.
 3. Enviar una notificación a un usuario:
     - Endpoint: /API/notificaciones
     - Método: POST
     - Código de estado:
-     
+        - 202 Accepted: La notificación ha sido aceptada para su envío (no garantiza que se haya enviado con éxito).
+        - 400 Bad Request: Si falta algún dato en la solicitud o si el formato es incorrecto.
+        - 404 Not Found: El usuario no existe.
+        - 500 Internal Server Error: Si ocurre un error interno al enviar la notificación.
+            
 ## Diseño de la Página Web 🚀
 La página web podría tener las siguientes secciones:
 - **Página de inicio**: Con un buscador destacado, recomendaciones personalizadas y una sección de últimas novedades.
