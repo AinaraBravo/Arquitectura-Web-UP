@@ -35,6 +35,12 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
 - Plataforma_Online - Proyección: Una plataforma puede tener muchas proyecciones (relación uno a muchos).
 
 ## Manejo de los objetos con protocolo HTTP
+### Gestión de usuarios
+### Gestión de peliculas
+### Gestión de horarios y salas
+### Administración
+### Social
+### Notificaciones
 1. Obtener una pelicula específica:
    - Endpoint: /API/Peliculas/{id_pelicula}
    - Método: GET
