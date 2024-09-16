@@ -226,18 +226,18 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
         - 404 Not Found: La película o la sala de cine no existen, o no hay horarios disponibles para esa película en esa sala.
         - 500 Internal Server Error: Ocurrió un error interno en el servidor al obtener los horarios.
     - Respuesta:
-      * *Respuesta exitosa (200 OK)* *
       [
         {
-          "id": 1,
-          "nombre": "Cinepolis",
-          "direccion": "Avenida Siempreviva 123",
-          "latitud": -33.4167,
-          "longitud": -70.6167,
-          "distancia": 1.5 // En kilómetros
+            "hora": "19:00",
+            "sala": "Sala 1",
+            "precio": 8.50
         },
-        // ... otras salas
-      ]
+        {
+            "hora": "21:30",
+            "sala": "Sala 3",
+            "precio": 10.00
+        }
+     ]
 
 ### Administración
 1. Agregar una película:
@@ -249,6 +249,14 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
         - 400 Bad Request: Faltan datos obligatorios o hay un formato incorrecto.
         - 409 Conflict: Ya existe una película con el mismo título.
         - 500 Internal Server Error: Ocurrió un error interno en el servidor.
+    - Respuesta:
+      {
+        "id": 123,
+        "titulo": "La película",
+        "genero": "Drama",
+        // ... otros campos
+      }
+
 2. Eliminar una película:
     - Endpoint: /API/Peliculas/{id_peliculas}
     - Método: DELETE
@@ -264,7 +272,16 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
         - 200 OK: Se devolvió el historial de visualizaciones del usuario.
         - 404 Not Found: El usuario con el ID especificado no existe.
         - 500 Internal Server Error: Ocurrió un error interno al obtener el historial.
-      
+    - Respuesta:
+        [
+            {
+                "peliculaId": 123,
+                "titulo": "La película",
+                "fechaVisualizacion": "2023-11-22"
+            },
+            // ... otras visualizaciones
+        ]
+
 ### Social
 1. Compartir en redes sociales:
     - Endpoint: /API/Peliculas/{id_pelicula}/compartir
@@ -284,6 +301,13 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
         - 404 Not Found: El usuario no existe.
         - 409 Conflict: Ya existe una suscripción con las mismas características.
         - 500 Internal Server Error: Si ocurre un error interno al crear la suscripción.
+    - Respuesta:
+      {
+        "id": 123,
+        "tipo": "nueva_pelicula",
+        "genero": "ciencia_ficcion"
+      }
+    
 2. Eliminar una suscripcion:
     - Endpoint: /API/Usuarios/{id_usuario}/suscripciones/{id_suscripcion}
     - Método: DELETE
@@ -300,6 +324,10 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
         - 400 Bad Request: Si falta algún dato en la solicitud o si el formato es incorrecto.
         - 404 Not Found: El usuario no existe.
         - 500 Internal Server Error: Si ocurre un error interno al enviar la notificación.
+    - Respuesta:
+      {
+        "mensaje": "La notificación ha sido enviada para su procesamiento"
+      }
             
 ## Diseño de la Página Web 🚀
 La página web podría tener las siguientes secciones:
