@@ -1,4 +1,4 @@
-![cine](https://www.cronista.com/files/image/703/703805/6548e81537f93.jpg)
+![cine](https://c0.klipartz.com/pngpicture/1015/219/sticker-png-github-computer-software-node-js-github-inc-microsoft-fork-nodejs-git.png)
 
 # Sistema de Gestión de Peliculas 
 ## Descripción de la página web 🍿
@@ -74,26 +74,30 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
       - 404 Not Found: Si no se encuentra el usuario con el email especificado.
       - 400 Bad Request: Si el formato del email es inválido.
       - 500 Internal Server Error: Si ocurre un error interno en el servidor.
-      - 
+        
 ### Gestión de peliculas
 1. Obtener detalles de una pelicula:
    - Endpoint: /API/Peliculas/{id_pelicula}
    - Método: GET
-   - Código de estado: 
+   - Código de estado:
+     
 2. Buscar una pelicula por genero:
    - Endpoint: /API/Peliculas?genero={genero}
    - Método: GET
    - Código de estado:
+     
 3. Agregar una pelicula a la lista de favoritos de un usuario:
    - Endpoint: /API/Usuarios/{id}/favoritos
    - Método: POST
    - Cuerpo: id_pelicula
    - Código de estado:
+     
 4. Calificar una pelicula:
    - Endpoint:/API/Peliculas/{id}/calificar
    - Método: POST
    - Cuerpo: calificacion
-   - Código de estado: Si la calificación se crea correctamente, el servidor debería devolver un código de estado 201 (Created).
+   - Código de estado:
+     
 5. Obtener recomendaciones de una pelicula:
    - Endpoint: /API/Peliculas/recomendaciones
    - Método: GET
