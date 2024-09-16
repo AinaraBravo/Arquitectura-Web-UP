@@ -17,7 +17,7 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
 - **Película**: Contiene información que es fundamental para la búsqueda y recomendación.
   - Atributos: id_pelicula, título, genero, año, director, actores, sinopsis, duración.
 - **Usuario**: Contiene información del usuario, incluyendo su historial de visualización que será clave para las recomendaciones personalizadas.
-  - Atributos: id_usuario, nombre, email, contraseña, historial_visualizacion.
+  - Atributos: id_usuario, nombre, email, contrasenia, historial_visualizacion.
 - **Horario**: Contiene los horarios de proyección en las salas de cine.
   - Atributos: id_horario, inicio, fin, duracion.
 - **Sala_De_Cine**: Contiene la información geográfica de las salas.
@@ -39,16 +39,25 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
 1. Crear un nuevo usuario:
    - Endpoint: /API/Usuarios
    - Método: POST
-   - Cuerpo: nombre,email, contraseña.
-   - Código de estado:
-     
+   - Cuerpo: nombre,email, contrasenia
+   - Código de estado: 
 2. Actualizar la información de un usuario:
    - Endpoint: /API/Usuarios/{id_usuario}
    - Método: PUT
    - Código de estado:
+3. Iniciar sesión:
+   - Endpoint: /API/Usuarios/login
+   - Método: POST
+   - Cuerpo: email, contrasenia
+   - Código de estado:
+4. Recuperar contraseña:
+   - Endpoint: /API/Usuarios/recuperar_contrasena
+   - Método: POST
+   - Cuerpo: email
+   - Código de estado: 
      
 ### Gestión de peliculas
-1. Obtener una pelicula específica:
+1. Obtener detalles de una pelicula:
    - Endpoint: /API/Peliculas/{id_pelicula}
    - Método: GET
    - Código de estado: 
@@ -64,14 +73,23 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
 4. Calificar una pelicula:
    - Endpoint:/API/Peliculas/{id}/calificar
    - Método: POST
+   - Cuerpo: calificacion
    - Código de estado: Si la calificación se crea correctamente, el servidor debería devolver un código de estado 201 (Created).
+5. Obtener recomendaciones de una pelicula:
+   - Endpoint: /API/Peliculas/recomendaciones
+   - Método: GET
+   - Código de estado:
      
 ### Gestión de horarios y salas
 1. Obtener las salas de cine cercanas a una ubicación:
    - Endpoint:/API/Salas_De_Cine?latitud={lat}&longitud={lon}
    - Método: GET
    - Código de estado: 
-
+2. Obtener horarios de una pelicula en una sala de cine:
+   - Endpoint: /API/Peliculas/{id_pelicula}/Horarios
+   - Método: GET
+   - Código de estado:
+     
 ### Administración
 1. Agregar una pelicula:
    - Endpoint: /API/Peliculas
@@ -88,9 +106,27 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
     - Código de estado:
       
 ### Social
+1. Compartir en redes sociales:
+    - Endpoint: /API/Peliculas/{id_pelicula}/compartir
+    - Método: POST
+    - Código de estado:
+      - 200 OK: Si la solicitud se procesó correctamente y se envió la solicitud a la red social.
+      - 400 Bad Request: Si falta algún dato en la solicitud o si el formato es incorrecto.
+      - 500 Internal Server Error: Si ocurre un error interno al procesar la solicitud.
 
 ### Notificaciones
-
+1. Subscribirse a un tipo de notificación:
+    - Endpoint: /API/Usuarios/{id_usuario}/suscripciones
+    - Método: POST
+    - Código de estado:
+2. Eliminar una suscripcion:
+    - Endpoint: /API/Usuarios/{id_usuario}/suscripciones/{id_suscripcion}
+    - Método: DELETE
+    - Código de estado:
+3. Enviar una notificación a un usuario:
+    - Endpoint: /API/notificaciones
+    - Método: POST
+    - Código de estado:
      
 ## Diseño de la Página Web 🚀
 La página web podría tener las siguientes secciones:
