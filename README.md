@@ -15,7 +15,7 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
 ## Entidades y Relaciones
 ### Entidades 
 - **Película**: Contiene información que es fundamental para la búsqueda y recomendación.
-  - Atributos: id_pelicula, título, género, año, director, actores, sinopsis, duración, calidad.
+  - Atributos: id_pelicula, título, genero, año, director, actores, sinopsis, duración.
 - **Usuario**: Contiene información del usuario, incluyendo su historial de visualización que será clave para las recomendaciones personalizadas.
   - Atributos: id_usuario, nombre, email, contraseña, historial_visualizacion.
 - **Horario**: Contiene los horarios de proyección en las salas de cine.
@@ -35,8 +35,50 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
 - Plataforma_Online - Proyección: Una plataforma puede tener muchas proyecciones (relación uno a muchos).
 
 ## Manejo de los objetos con protocolo HTTP
-
-
+1. Obtener una pelicula específica:
+   - Endpoint: /API/Peliculas/{id_pelicula}
+   - Método: GET
+   - Código de estado: 
+2. Buscar una pelicula por genero:
+   - Endpoint: /API/Peliculas?genero={genero}
+   - Método: GET
+   - Código de estado: 
+3. Crear un nuevo usuario:
+   - Endpoint: /API/Usuarios
+   - Método: POST
+   - Cuerpo: nombre,email, contraseña.
+   - Código de estado: 
+4. Agregar una pelicula:
+   - Endpoint: /API/Peliculas
+   - Método: POST
+   - Cuerpo: título, genero, año, director, actores, sinopsis, duración.
+   - Código de estado: 
+5. Actualizar la información de un usuario:
+   - Endpoint: /API/Usuarios/{id_usuario}
+   - Método: PUT
+   - Código de estado: 
+6. Eliminar una pelicula:
+   - Endpoint:/API/Peliculas/{id_peliculas}
+   - Método: DELETE
+   - Código de estado: 
+7. Agregar una pelicula a la lista de favoritos de un usuario:
+   - Endpoint: /API/Usuarios/{id}/favoritos
+   - Método: POST
+   - Cuerpo: id_pelicula
+   - Código de estado: 
+8. Obtener las salas de cine cercanas a una ubicación:
+   - Endpoint:/API/Salas_De_Cine?latitud={lat}&longitud={lon}
+   - Método: GET
+   - Código de estado: 
+9. Calificar una pelicula:
+    -Endpoint:/API/Peliculas/{id}/calificar
+   - Método: POST
+   - Código de estado: Si la calificación se crea correctamente, el servidor debería devolver un código de estado 201 (Created).
+10. Obtener el historial de visualizaciones de un usuario:
+    - Endpoint: /API/Usuarios/{id}/historial
+    - Método: GET
+    - Código de estado:
+     
 ## Diseño de la Página Web 🚀
 La página web podría tener las siguientes secciones:
 - **Página de inicio**: Con un buscador destacado, recomendaciones personalizadas y una sección de últimas novedades.
