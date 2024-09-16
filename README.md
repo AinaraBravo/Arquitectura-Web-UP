@@ -77,12 +77,12 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
         
 ### Gestión de peliculas
 1. Obtener detalles de una película:
-  - Endpoint: /API/Peliculas/{id_pelicula}
-  - Método: GET
-  - Códigos de estado:
-      - 200 OK: La película se encontró y se devolvieron sus detalles.
-      - 404 Not Found: La película con el ID especificado no existe.
-      - 500 Internal Server Error: Ocurrió un error interno en el servidor al intentar obtener los datos.
+    - Endpoint: /API/Peliculas/{id_pelicula}
+    - Método: GET
+    - Códigos de estado:
+        - 200 OK: La película se encontró y se devolvieron sus detalles.
+        - 404 Not Found: La película con el ID especificado no existe.
+        - 500 Internal Server Error: Ocurrió un error interno en el servidor al intentar obtener los datos.
 2. Buscar una película por género:
   - Endpoint: /API/Peliculas?genero={genero}
   - Método: GET
