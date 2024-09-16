@@ -45,7 +45,17 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
       - 201 Created: Si el usuario se crea correctamente.
       - 400 Bad Request: Si faltan datos o hay algún error de validación (por ejemplo, email ya existe).
       - 500 Internal Server Error: Si ocurre un error interno en el servidor.
-        
+    - Respuesta:
+      // Respuesta exitosa (201 Created)
+      {
+        "id": 123,
+        "nombre": "John Doe",
+        "email": "johndoe@example.com"
+      }
+      // Respuesta de error (400 Bad Request)
+      {
+        "error": "El campo 'contraseña' es obligatorio"
+      }
 2. Actualizar la información de un usuario:
    - Endpoint: /API/Usuarios/{id_usuario}
    - Método: PUT
