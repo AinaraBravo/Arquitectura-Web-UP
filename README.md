@@ -331,10 +331,10 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
             
 ## Diseño de la Página Web 🚀
 La página web podría tener las siguientes secciones:
-- **Página de inicio**: Con un buscador destacado, recomendaciones personalizadas y una sección de últimas novedades.
-- **Perfil de usuario**: Donde el usuario puede gestionar sus listas, ver su historial y ajustar sus preferencias.
-- **Detalle de película**: Una página dedicada a cada película con toda la información relevante, trailers, críticas y opciones para verla.
-- **Explorar**: Secciones para explorar películas por género, director, actor, etc.
+- **Página de inicio**: Con un buscador destacado, recomendaciones personalizadas y una sección de peliculas destacadas del año.
+- **Perfil de usuario**: Donde el usuario puede gestionar su lista de favoritos.
+- **Detalle de película**: Una página dedicada a cada película con toda la información relevante, comentarios y opciones para verla.
+- **Explorar**: Secciones para explorar películas por género, actor, disponibilidad en plataformas  o salas de cine.
 - **Listados**: Donde los usuarios pueden ver sus listas personalizadas y crear nuevas.
 
 ## Consideraciones Adicionales 
