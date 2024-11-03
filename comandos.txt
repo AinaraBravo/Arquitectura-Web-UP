@@ -1,0 +1,14 @@
+1) git add .
+2) git commit -m "Mensaje describiendo los cambios"
+3) git push origin main
+
+para correr el programa, poner "npm run dev"
+
+por si no toma la base de datos, brew services restart mysql y desp le damos a workbench
+la contrasena de la base de datos es 44083623
+
+4) En el Frontend:
+Cuando se muestre la información de la sala, puedes generar un botón o un enlace con la URL proporcionada para que los usuarios puedan hacer clic y ser redirigidos a la página del cine para comprar las entradas.
+
+Por ejemplo:
+<a href="https://cinepremier.com.ar" target="_blank">Comprar entradas en Cine Premier</a>
