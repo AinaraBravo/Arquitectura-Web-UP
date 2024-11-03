@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Lista - Thunder</title>
+    <link rel="stylesheet" href="style.css"> <!-- Enlace a tu archivo CSS -->
+    <link rel="stylesheet" href="movies.css"> <!-- Enlace a tu archivo CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logo de la Página">
+        </div>
+        <nav>
+            <a href="inicio.html">Inicio</a>
+            <a href="movies.html">Películas</a>
+            <a href="list.html" class="active">Mi lista</a>
+            <a href="salas.html">Explorar salas cercanas</a>
+        </nav>
+        <form id="search-form">
+            <input type="text" id="search-input" placeholder="Títulos, personas, géneros">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+    </header>
+
+    <main>
+        <h1>Mis Películas Favoritas</h1>
+        <input type="text" id="emailInput" placeholder="Ingresa tu correo electrónico">
+        <button id="showFavoritesBtn">Mostrar Favoritos</button>
+        <div id="favoritosContainer" class="grid-container" style="display:none;">
+            <div id="favoritosList"></div>
+            <button id="closeFavoritesBtn">Cerrar</button>
+        </div>
+        <div id="favoritosContainer" class="grid-container">
+            <!-- Aquí se llenarán las tarjetas de películas favoritas -->
+        </div>
+        
+    </main>
+
+    <script src="script.js"></script>
+    <script src="list.js"></script>
+</body>
+</html>

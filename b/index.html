@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thunder Argentina - Descubre nuevas películas y series</title>
+    <link rel="icon" href="thunder.png" type="image/png">
+    <link rel="stylesheet" href="style2.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <select name="language" id="language">
+            <option value="en">Ingles</option>
+            <option value="hindi">Español</option>
+            <!-- Add more languages here -->
+        </select>
+        <button type="button" class="primary__button" onclick="window.location.href='login.html'">
+            Iniciar sesion <i class="fal fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <div class="background">
+        <div class="overlay">
+            <div class="content">
+                <img src="logo.png" alt="Netflix Logo" class="logo">
+                <h1>Películas y series en todas tus plataformas favoritas<br />
+                    y mucho más</h1>
+                <p>Encuentra contenido en streaming y en los cines, ¡todo en un solo lugar!</p>
+                <p>¿Listo para descubrir dónde ver tu próxima película? Ingresa tu correo y explorar el contenido disponible en Netflix, Amazon, Disney+,
+                    HBO Max y en cines cerca de ti.</p>
+                <form class="email-form">
+                    <input type="email" placeholder="Email" required>
+                    <button type="button" class="primary__button" onclick="window.location.href='signup.html'">
+                        Comenzar <i class="fal fa-chevron-right"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="image_container">
+            <img decoding="async" src="bg.jpg" alt="image" class="image_container" />
+        </div>
+    </div>
+
+    <!-- Image Carousel Section -->
+    <div class="carousel-section">
+        <h2 class="section-title">Tendencias</h2>
+
+        <!-- Carousel Wrapper with navigation arrows -->
+        <div class="carousel-wrapper">
+            <div class="arrow arrow-left" onclick="moveLeft()">&#8249;</div> <!-- Left arrow -->
+            <div class="carousel-track" id="carousel-track">
+                <div class="carousel-card">
+                    <img src="poster1.jpg" alt="Sector 36">
+                    <div class="card-number">1</div>
+                    <div class="card-info">
+                        <span>Recien agregado</span>
+                    </div>
+                </div>
+                <div class="carousel-card">
+                    <img src="poster2.jpg" alt="Mr Bachchan">
+                    <div class="card-number">2</div>
+                    <div class="card-info">
+                        <span>Recien agregado</span>
+                    </div>
+                </div>
+                <div class="carousel-card">
+                    <img src="poster3.jpeg" alt="Bad Boys">
+                    <div class="card-number">3</div>
+                    <div class="card-info">
+                        <span>Recien agregado</span>
+                    </div>
+                </div>
+                <div class="carousel-card">
+                    <img src="poster4.jpg" alt="Rebel Ridge">
+                    <div class="card-number">4</div>
+                    <div class="card-info">
+                        <span>Recien agregado</span>
+                    </div>
+                </div>
+                <div class="carousel-card">
+                    <img src="poster5.jpg" alt="New Movie">
+                    <div class="card-number">5</div>
+                    <div class="card-info">
+                        <span>Recien agregado</span>
+                    </div>
+                </div>
+                <div class="carousel-card">
+                    <img src="poster6.jpg" alt="Movie 6">
+                    <div class="card-number">6</div>
+                    <div class="card-info">
+                        <span>Recien agregado</span>
+                    </div>
+                </div>
+                <div class="carousel-card">
+                    <img src="poster7.jpg" alt="Movie 7">
+                    <div class="card-number">7</div>
+                    <div class="card-info">
+                        <span>Recien agregado</span>
+                    </div>
+                </div>
+                <div class="carousel-card">
+                    <img src="poster8.jpg" alt="Movie 8">
+                    <div class="card-number">8</div>
+                    <div class="card-info">
+                        <span>Recien agregado</span>
+                    </div>
+                </div>
+                <div class="carousel-card">
+                    <img src="poster9.jpeg" alt="Movie 9">
+                    <div class="card-number">9</div>
+                    <div class="card-info">
+                        <span>Recien agregado</span>
+                    </div>
+                </div>
+                <div class="carousel-card">
+                    <img src="poster10.jpg" alt="Movie 10">
+                    <div class="card-number">10</div>
+                    <div class="card-info">
+                        <span>Recien agregado</span>
+                    </div>
+                </div>
+            </div>
+            <div class="arrow arrow-right" onclick="moveRight()">&#8250;</div> <!-- Right arrow -->
+        </div>
+    </div>
+
+
+
+    <!-- Features Section -->
+    <div class="section-features">
+        <h2 class="section-title">Más motivos para unirte</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-title">Encuentra tu contenido en todos tus dispositivos</span>
+                <p class="feature-description">Disfruta de Thunder en tu Smart TV, computadora, tablet y teléfono para ver el contenido en cualquier lugar y momento.<img src="tv.png" class="feature-icon">
+            </div>
+            <div class="feature-card">
+                <span class="feature-title">Descarga tus películas para verlas sin conexión
+                </span>
+                <p class="feature-description">Guarda tus películas y series favoritas y accede a ellas en cualquier momento, incluso sin conexión a Internet.<img src="download.png" class="feature-icon">
+            </div>
+            <div class="feature-card">
+                <span class="feature-title">Descubre contenido en todas las plataformas</span>
+                <p class="feature-description">Explora películas y series disponibles en Netflix, Amazon, Disney+, HBO Max, y cines cercanos, todo desde una sola aplicación.</p>
+                <img src="celebration.png" class="feature-icon">
+            </div>
+            <div class="feature-card">
+                <span class="feature-title">Perfiles dedicados para niños</span>
+                <p class="feature-description">Los niños disfrutarán de un espacio diseñado especialmente para ellos, con contenido adaptado y seguro, ¡incluido con tu cuenta de Thunder!</p>
+                <img src="profile.png" class="feature-icon">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- FAQ Section -->
+    <div class="section-faq">
+        <h2 class="section-title">Preguntas frecuentes</h2>
+        <div class="faq-list">
+            <div class="faq-entry">
+                <div class="faq-question">
+                    <span class="question-text">¿Qué es Thunder?</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    Thunder es un servicio que te ayuda a encontrar películas y series en tus plataformas
+                    favoritas, ya sea en streaming o en cines cerca de ti.
+                </div>
+            </div>
+
+            <div class="faq-entry">
+                <div class="faq-question">
+                    <span class="question-text">¿Cuánto cuesta Thunder?</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    Thunder tiene varios planes mensuales para que accedas sin restricciones al contenido
+                    de diversas plataformas. Puedes cancelar cuando quieras.
+                       
+                </div>
+            </div>
+
+            <div class="faq-entry">
+                <div class="faq-question">
+                    <span class="question-text">¿Cómo cancelo?</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    Puedes cancelar fácilmente tu membresía en cualquier momento, sin cargos adicionales.    
+                </div>
+            </div>
+
+
+            <div class="faq-entry">
+                <div class="faq-question">
+                    <span class="question-text">¿Qué puedo encontrar en Thunder?</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    Thunder ofrece una gran variedad de películas y series disponibles en diferentes
+                    plataformas de streaming y cines.
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Subscription Section -->
+    <div class="subscription-section">
+        <p class="subscription-text">¿Listo para comenzar? Ingresa tu email para crear una cuenta o reiniciar tu membresía de Thunder.
+            <form class="subscription-form">
+            <input type="email" class="email-input" placeholder="Email" required>
+            <button type="button" class="primary__button" onclick="window.location.href='signup.html'">
+                Comenzar <i class="fal fa-chevron-right"></i>
+            </button>
+            </form>
+    </div>
+
+
+
+    <!-- Footer Section -->
+    <div class="site-footer">
+        <p class="footer-title">¿Preguntas? Llama al 0800 350 1593</p>
+
+        <!-- Footer Links -->
+        <div class="footer-links">
+            <div class="footer-link-group">
+                <a href="#">FAQ</a>
+                <a href="#">Investor Relations</a>
+                <a href="#">Privacy</a>
+                <a href="#">Speed Test</a>
+            </div>
+            <div class="footer-link-group">
+                <a href="#">Help Centre</a>
+                <a href="#">Jobs</a>
+                <a href="#">Cookie Preferences</a>
+                <a href="#">Legal Notices</a>
+            </div>
+            <div class="footer-link-group">
+                <a href="#">Account</a>
+                <a href="#">Ways to Watch</a>
+                <a href="#">Corporate Information</a>
+                <a href="#">Only on Thunder</a>
+            </div>
+        </div>
+
+        <!-- Language Selector -->
+        <div class="language-dropdown">
+            <select class="language-select">
+                <option value="en">Ingles</option>
+                <option value="hindi">Español</option>
+            </select>
+        </div>
+
+        <!-- Footer Bottom Text -->
+        <div class="footer-copyright">
+            <p>Thunder Argentina</p>
+        </div>
+    </div>
+
+    <script src="script2.js"></script>
+
+</body>
+</html>

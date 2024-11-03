@@ -1,0 +1,189 @@
+/* Estilos generales para inputs y selects */
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid var(--black2);
+    border-radius: 5px;
+    font-size: 16px; /* Tamaño de letra consistente */
+}
+
+/* Estilos para el formulario de agregar película */
+.addMovieForm {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+  
+.addMovieForm input,
+.addMovieForm select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid var(--black2);
+    border-radius: 5px;
+    font-size: 16px;
+}
+  
+.addMovieForm button {
+    background-color: var(--blue);
+    color: var(--white);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* Tamaño de letra consistente */
+}
+  
+.addMovieForm button:hover {
+    background-color: darken(var(--blue), 10%);
+}
+
+/* Estilos para la sección de actualizar película */
+.updateMovieForm {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+  
+.updateMovieForm input,
+.updateMovieForm select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid var(--black2);
+    border-radius: 5px;
+    font-size: 16px;
+}
+  
+.updateMovieForm button {
+    background-color: var(--blue);
+    color: var(--white);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* Tamaño de letra consistente */
+}
+  
+.updateMovieForm button:hover {
+    background-color: darken(var(--blue), 10%);
+}
+
+/* Estilos para la sección de eliminar película */
+.deleteMovieSection {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+  
+.deleteMovieSection input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid var(--black2);
+    border-radius: 5px;
+    font-size: 16px;
+}
+  
+.deleteMovieSection button {
+    background-color: #e74c3c; /* Color rojo para eliminación */
+    color: var(--white);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* Tamaño de letra consistente */
+}
+  
+.deleteMovieSection button:hover {
+    background-color: #c0392b; /* Color rojo más oscuro al pasar el ratón */
+}
+
+/* Estilos para la tabla de películas */
+.movieTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+  
+.movieTable th,
+.movieTable td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+  
+.movieTable th {
+    background-color: #f8f8f8;
+    font-weight: 600;
+}
+  
+.movieTable tr:hover {
+    background-color: #f1f1f1; /* Color de fondo al pasar el mouse */
+}
+  
+.movieTable .actionButtons {
+    display: flex;
+    justify-content: space-between;
+}
+  
+.movieTable .actionButtons button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* Tamaño de letra consistente */
+}
+  
+.movieTable .actionButtons .edit {
+    background-color: #3498db; /* Azul para editar */
+    color: white;
+}
+  
+.movieTable .actionButtons .delete {
+    background-color: #e74c3c; /* Rojo para eliminar */
+    color: white;
+}
+
+/* Estilos para el formulario de películas */
+.movieForm {
+    margin-bottom: 20px;
+    padding: 40px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.movieForm h2 {
+    margin-bottom: 16px;
+}
+
+.movieForm input,
+.movieForm select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.movieForm button {
+    background-color: #c0392b;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px; /* Tamaño de letra consistente */
+}
+
+.movieForm button:hover {
+    background-color: #c0392b;
+}
+

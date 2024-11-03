@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Administrador - Thunder</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="peliculas.css">
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <img src="logo.png" alt="Logo Thunder" style="width: 62px; height: 62px;">
+                        </span>
+                        <span class="title">Panel de Control</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="admin.html"> <!-- Redirige a la página de inicio -->
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Inicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="peliculas.html"> <!-- Redirige a la página de películas -->
+                        <span class="icon">
+                            <ion-icon name="film-outline"></ion-icon>
+                        </span>
+                        <span class="title">Películas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="usuarios.html"> <!-- Redirige a la página de usuarios -->
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Usuarios</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="plataformas.html"> <!-- Redirige a la página de plataformas -->
+                        <span class="icon">
+                            <ion-icon name="tv-outline"></ion-icon>
+                        </span>
+                        <span class="title">Plataforma Online</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="salasAdmin.html"> <!-- Redirige a la página de salas de cine -->
+                        <span class="icon">
+                            <ion-icon name="film-outline"></ion-icon>
+                        </span>
+                        <span class="title">Salas de Cine</span>
+                    </a>
+                    <li>
+                        <a href="index.html">
+                            <span class="icon">
+                                <ion-icon name="log-out-outline"></ion-icon>
+                            </span>
+                            <span class="title">Cerrar sesión</span>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="user">
+                    <img src="customer01.jpg" alt="">
+                </div>
+            </div>
+
+            <!-- ================== Formulario Agregar Película ================== -->
+            <div class="movieForm addMovieForm">
+                <h2>Agregar Nueva Película</h2>
+                <input type="text" id="titulo" placeholder="Título de la película" required />
+                <select id="genero" required>
+                    <option value="">Seleccionar Género</option>
+                    <option value="Acción">Acción</option>
+                    <option value="Aventura">Aventura</option>
+                    <option value="Comedia">Comedia</option>
+                    <option value="Ciencia Ficción">Ciencia Ficción</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Terror">Terror</option>
+                    <option value="Romance">Romance</option>
+                </select>
+                <input type="text" id="año" placeholder="Año" required />
+                <input type="text" id="sinopsis" placeholder="Sinopsis" required />
+                <input type="text" id="duracion" placeholder="Duración (minutos)" required />
+                <input type="text" id="actores" placeholder="Actores (separados por comas)" required />
+                <select id="plataformas" required>
+                    <option value="">Seleccionar Plataforma</option>
+                </select>
+                <input type="text" id="salas_de_cine" placeholder="Salas de Cine (IDs separados por comas)" required />
+                <button id="addMovieBtn">Agregar Película</button>
+            </div>
+
+            <!-- ================== Formulario Actualizar Película ================== -->
+            <div class="movieForm putMovieForm">
+                <h2>Actualizar Película</h2>
+                <input type="text" id="tituloActualizar" placeholder="Título de la película" required />
+                <select id="nuevoGenero" required>
+                    <option value="">Seleccionar Nuevo Género</option>
+                    <option value="Acción">Acción</option>
+                    <option value="Aventura">Aventura</option>
+                    <option value="Comedia">Comedia</option>
+                    <option value="Ciencia Ficción">Ciencia Ficción</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Terror">Terror</option>
+                    <option value="Romance">Romance</option>
+                </select>
+                <select id="nuevaPlataforma" required>
+                    <option value="">Seleccionar Plataforma</option>
+                    <option value="1">Netflix</option>
+                    <option value="2">Amazon Prime</option>
+                    <option value="3">Disney+</option>
+                    <option value="4">HBO Max</option>
+                </select>
+                <input type="text" id="nuevasSalasDeCine" placeholder="Nuevas Salas de Cine (IDs separados por comas)" required />
+                <button id="updateMovieBtn">Actualizar Película</button>
+            </div>
+
+            <!-- ================== Formulario Eliminar Película ================== -->
+            <div class="movieForm deleteMovieForm">
+                <h2>Eliminar Película</h2>
+                <input type="text" id="nombrePelicula" placeholder="Título de la película" required />
+                <button id="deleteMovieBtn">Eliminar Película</button>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- =========== Scripts =========  -->
+    <script src="main.js"></script>
+    <script src="peliculas.js"></script>
+    <script src="plataformas.js"></script>
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

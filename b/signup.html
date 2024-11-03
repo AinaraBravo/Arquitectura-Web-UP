@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Thunder Argentina</title>
+    <link rel="stylesheet" href="signup.css">
+    <script src="signup.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar__brand">
+                <img src="logo.png" alt="logo" class="brand__logo" />
+            </div>
+            <div class="navbar__nav__items">
+                <a href="login.html" class="signin__button">Inicia sesión</a>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="signup">
+            <h1>Crear Cuenta</h1>
+
+            <div id="messageDiv" style="display: none;"></div> <!-- Div para mensajes -->
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="nameInput">Nombre</label>
+                    <input type="text" id="nameInput" required placeholder="Tu nombre" />
+                </div>
+                <div class="form-group">
+                    <label for="emailInput">Email</label>
+                    <input type="email" id="emailInput" required placeholder="Tu email" />
+                </div>
+                <div class="form-group">
+                    <label for="passwordInput">Contraseña</label>
+                    <input type="password" id="passwordInput" required placeholder="Tu contraseña" />
+                </div>
+                <button type="submit" class="primary__button">Registrarse</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Thunder Argentina &copy; 2024</p>
+    </footer>
+</body>
+</html>

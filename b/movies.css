@@ -1,0 +1,111 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000000; /* Fondo negro para toda la página */
+    color: #ffffff; /* Color de texto general en blanco */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    overflow-y: scroll; /* Cambiado a 'scroll' */
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #ed1136; /* Cambia el color del encabezado a rojo */
+}
+
+#peliculasContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    overflow-y: auto; /* Permitir scroll dentro del contenedor de películas */
+    max-height: calc(100vh - 120px); /* Ajusta el valor según el espacio disponible */
+    width: 100%;
+    background-color: #000000; /* Fondo negro para el contenedor de películas */
+    color: #ed1136; /* Cambia el color del texto a rojo dentro del contenedor */
+}
+
+.pelicula {
+    background-color: #000000; /* Fondo negro para cada tarjeta de película */
+    border-radius: 8px;
+    overflow: hidden;
+    width: 200px; /* Ajusta el ancho de las tarjetas */
+    transition: transform 0.3s;
+    color: #ed1136; /* Cambia el color del texto dentro de la tarjeta a rojo */
+}
+
+.pelicula:hover {
+    transform: scale(1.05);
+}
+
+.pelicula img {
+    width: 100%;
+    border-bottom: 3px solid #e50914; /* Línea roja en la parte inferior */
+}
+
+.pelicula h2 {
+    margin: 10px;
+    font-size: 16px;
+    color: #ed1136; /* Cambia el color del título a rojo */
+}
+
+.pelicula p {
+    margin: 10px;
+    font-size: 12px;
+    color: #cccccc; /* Mantén el color gris para el texto adicional */
+}
+
+.calificacion {
+    display: flex;
+    cursor: pointer; /* Cambia el cursor para que indique que se puede hacer clic */
+}
+
+.star {
+    font-size: 24px; /* Ajusta el tamaño de las estrellas */
+    color: gray; /* Color por defecto */
+    margin-right: 5px; /* Espacio entre las estrellas */
+}
+
+.star:hover,
+.star:hover ~ .star {
+    color: gold; /* Color al pasar el mouse */
+}
+
+    /* 
+* Email subscription form styling 
+*/
+.email-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.email-form input[type="email"] {
+    padding: 15px;
+    font-size: 1rem;
+    width: 300px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background: transparent;
+}
+
+
+.emailInput input {
+    padding: 15px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde gris */
+    border-radius: 5px 0 0 5px; /* Bordes redondeados en la izquierda */
+    font-size: 1rem; /* Tamaño de fuente */
+    flex: 1; /* Permite que el input ocupe el espacio disponible */
+}
+
+
+.emailInput button:hover {
+    background-color: #f40612; /* Color de fondo al pasar el mouse */
+}

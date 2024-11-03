@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina de inicio - Thunder</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    <!-- Encabezado con el logo y navegación -->
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logo de la Página">
+        </div>
+        <nav>
+            <a href="inicio.html">Inicio</a>
+            <a href="movies.html">Películas</a>
+            <a href="list.html">Mi lista</a>
+            <a href="salas.html">Explorar salas cercanas</a>
+            <button id="logout-btn" class="logout-btn">Cerrar sesión</button> <!-- Botón de cerrar sesión -->
+            <script>
+                document.getElementById('logout-btn').addEventListener('click', function() {
+                    // Redirigir a index.html
+                    window.location.href = 'index.html';
+                });
+            </script>
+        </nav>
+    </header>
+    
+    <main>
+        <h1>Lista de Películas</h1>
+        
+        <!-- Contenedor donde se mostrarán las películas desde el backend -->
+        <div id="movies-container">
+            <!-- Las películas se cargarán aquí mediante JavaScript -->
+        </div>
+
+        <!-- Contenedor donde se mostrarán los resultados -->
+        <div id="result-container">
+            
+        </div>
+
+    <script src="movies.js"></script>
+    </main>
+
+    <!-- Contenedor del carrusel de películas -->
+    <div class="container">
+        <div id="slide">
+            <!-- Cada elemento `.item` representa una película en el carrusel -->
+            <div class="item" style="background-image: url(1.jpg);">
+                <div class="content">
+                    <div class="name">INTENSAMENTE 2</div>
+                    <button>Más información <i class="fas fa-info-circle"></i></button>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(2.jpg);">
+                <div class="content">
+                    <div class="name">LOS TIPOS MALOS</div>
+                    <button>Más información <i class="fas fa-info-circle"></i></button>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(3.jpg);">
+                <div class="content">
+                    <div class="name">TROLLS 3</div>
+                    <button>Más información <i class="fas fa-info-circle"></i></button>
+
+                </div>
+            </div>
+            <div class="item" style="background-image: url(4.jpg);">
+                <div class="content">
+                    <div class="name">PARACAIDISMO</div>
+                    <button>Más información <i class="fas fa-info-circle"></i></button>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(7.jpg);">
+                <div class="content">
+                    <div class="name">AVATAR</div>
+                    <button>Más información <i class="fas fa-info-circle"></i></button>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(6.jpg);">
+                <div class="content">
+                    <div class="name">DUNE</div>
+                    <button>Más información <i class="fas fa-info-circle"></i></button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Botones para controlar el carrusel -->
+        <div class="buttons">
+            <button id="prev"><i class="fa-solid fa-angle-left"></i></button>
+            <button id="next"><i class="fa-solid fa-angle-right"></i></button>
+        </div>
+    </div>
+
+    <!-- Enlace al archivo JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

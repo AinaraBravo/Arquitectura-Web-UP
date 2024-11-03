@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Administrador - Thunder</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="peliculas.css">
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <img src="logo.png" alt="Logo Thunder" style="width: 62px; height: 62px;">
+                        </span>
+                        <span class="title">Panel de Control</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="admin.html"> <!-- Redirige a la página de inicio -->
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Inicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="peliculas.html"> <!-- Redirige a la página de películas -->
+                        <span class="icon">
+                            <ion-icon name="film-outline"></ion-icon>
+                        </span>
+                        <span class="title">Películas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="usuarios.html"> <!-- Redirige a la página de usuarios -->
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Usuarios</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="plataformas.html"> <!-- Redirige a la página de plataformas -->
+                        <span class="icon">
+                            <ion-icon name="tv-outline"></ion-icon>
+                        </span>
+                        <span class="title">Plataforma Online</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="salasAdmin.html"> <!-- Redirige a la página de salas de cine -->
+                        <span class="icon">
+                            <ion-icon name="film-outline"></ion-icon>
+                        </span>
+                        <span class="title">Salas de Cine</span>
+                    </a>
+                    <li>
+                        <a href="index.html">
+                            <span class="icon">
+                                <ion-icon name="log-out-outline"></ion-icon>
+                            </span>
+                            <span class="title">Cerrar sesión</span>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="search">
+                    <label>
+                        <input type="text" placeholder="Search here">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </label>
+                </div>
+
+                <div class="user">
+                    <img src="customer01.jpg" alt="">
+                </div>
+            </div>
+
+            <!-- ================== Formulario Agregar Sala de Cine ================== -->
+            <div class="movieForm addMovieForm">
+                <h2>Agregar Nueva Sala de Cine</h2>
+                <input type="text" id="nombreSalaAgregar" placeholder="Nombre de la Sala de Cine" required />
+                <input type="text" id="direccionSalaAgregar" placeholder="Dirección" required />
+                <input type="text" id="barrioSalaAgregar" placeholder="Barrio" required /> <!-- Campo para el barrio -->
+                <input type="text" id="urlSalaAgregar" placeholder="URL" /> <!-- Campo para la URL -->
+                <button id="addMovieBtn">Agregar Sala de Cine</button>
+            </div>
+
+            <!-- ================== Formulario Eliminar Sala de Cine ================== -->
+            <div class="movieForm deleteMovieForm">
+                <h2>Eliminar Sala de Cine</h2>
+                <input type="text" id="nombreSalaEliminar" placeholder="Nombre de la Sala de Cine" required />
+                <input type="text" id="direccionSalaEliminar" placeholder="Dirección" required />
+                <button id="deleteMovieBtn">Eliminar Sala de Cine</button>
+            </div>
+
+    </div>
+
+    <!-- =========== Scripts =========  -->
+    <script src="main.js"></script>
+    <script src="salasAdmin.js"></script>
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

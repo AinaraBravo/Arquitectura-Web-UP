@@ -1,0 +1,136 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Calibri', sans-serif; /* Cambia la fuente si quieres algo específico */
+    background: url('netflix_background.png') no-repeat center center fixed; /* Cambia la URL por la imagen de fondo que deseas usar */
+    background-size: cover; /* Asegúrate de que la imagen cubra toda la pantalla */
+}
+
+.background {
+    height: 100vh; /* Altura de pantalla completa */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box {
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo negro con algo de transparencia */
+    border-radius: 20px; /* Bordes redondeados */
+    padding: 40px; /* Espacio interno en el box */
+    width: 300px; /* Ajusta el tamaño según sea necesario */
+}
+
+.logo img {
+    width: 100%; /* Ajusta el logo para que ocupe el ancho del contenedor */
+    margin-bottom: 20px; /* Espacio debajo del logo */
+}
+
+.input-wrap {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #000000; /* Fondo oscuro para los campos de entrada */
+    color: rgba(255, 255, 255, 0.809); /* Texto blanco */
+}
+
+.label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white; /* Cambiado a blanco para las etiquetas */
+    transition: 0.5s;
+}
+
+.input-field:focus + .label,
+.input-field:not(:placeholder-shown) + .label {
+    top: -10px;
+    left: 5px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.759); /* Cambiar color de la etiqueta al enfocarse */
+}
+
+.sign-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: red; /* Color del botón */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sign-btn:hover {
+    background-color: darkred; /* Cambiar a un color más oscuro al pasar el ratón */
+}
+
+.heading h2 {
+    color: white; /* Color del encabezado */
+    text-align: center;
+    margin-bottom: 20px; /* Espacio debajo del encabezado */
+}
+
+/* Añadir margen superior a las etiquetas para mayor separación */
+.label {
+    margin-top: 20px; /* Agregar margen superior para separación */
+}
+
+/* Estilo general del formulario de actualización de contraseña */
+.update-password-form {
+    display: none; /* Oculto por defecto, se mostrará al hacer clic en "Actualizar Contraseña" */
+    padding: 20px; /* Espacio interior del formulario */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra alrededor del formulario */
+    margin-top: 20px; /* Margen superior para separar del contenido anterior */
+}
+
+/* Estilo de los campos de entrada */
+.update-password-form .input-wrap {
+    margin-bottom: 20px; /* Espaciado entre los campos */
+}
+
+.update-password-form .input-field {
+    width: 100%; /* Campo de entrada ocupa todo el ancho */
+    padding: 10px; /* Espaciado interior */
+    border: 1px solid #ccc; /* Borde claro */
+    border-radius: 4px; /* Bordes redondeados */
+    background-color: rgb(0, 0, 0); /* Fondo blanco para los campos */
+    color: #ffffff; /* Color del texto */
+    font-size: 12px; /* Tamaño de fuente */
+}
+
+/* Estilo de las etiquetas */
+.update-password-form .label {
+    display: block; /* Asegura que la etiqueta esté en su propia línea */
+    margin-bottom: 5px; /* Espaciado debajo de la etiqueta */
+    color: #fff; /* Color blanco para el texto de las etiquetas */
+}
+
+/* Estilo del botón para actualizar */
+.update-password-form .update-btn {
+    background-color: #bd1616; /* Color de fondo rojo */
+    color: white; /* Color del texto blanco */
+    padding: 10px 20px; /* Espaciado interno del botón */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    font-size: 16px; /* Tamaño de fuente */
+}
+
+/* Efecto hover para el botón */
+.update-password-form .update-btn:hover {
+    background-color: #a81212; /* Cambia el color al pasar el mouse */
+}
+
+/* Mensajes de error */
+.update-password-form .error-message {
+    color: red; /* Color rojo para mensajes de error */
+    margin-top: 10px; /* Espaciado superior */
+}

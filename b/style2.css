@@ -1,0 +1,793 @@
+    /* 
+* Global styles for margin, padding, and box-sizing 
+*/
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* 
+* Styles for body and html to ensure full height and consistent font 
+*/
+    body,
+    html {
+        height: 100%;
+        font-family: Arial, sans-serif;
+        background-color: #000;
+        color: white;
+    }
+
+    /* 
+* Outer div for the full background, with a background image 
+*/
+    .background {
+        background: url('images/bg.jpg') no-repeat center center/cover;
+        position: relative;
+        height: 100%;
+    }
+
+    /* 
+* Overlay div to darken the background and center the content 
+*/
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.75);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* 
+* Navigation bar at the top of the overlay 
+*/
+    .navbar {
+        display: flex;
+        justify-content: flex-end;
+        padding: 20px;
+        background-color: transparent;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 10;
+    }
+
+    /* 
+* Styles for buttons and select elements in the navbar 
+*/
+    .navbar button,
+    .navbar select {
+        background-color: #333;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1rem;
+        margin-left: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .navbar button {
+        background-color: #e50914;
+    }
+
+    .navbar button:hover {
+        background-color: #b20710;
+    }
+
+    .navbar select {
+        background-color: #333;
+    }
+
+    /* 
+* Content container within the overlay 
+*/
+    .content {
+        max-width: 600px;
+        padding: 20px;
+    }
+
+    /* 
+* Logo positioning within the overlay 
+*/
+    .logo {
+        position: absolute;
+        top: 20px;
+        left: 40px;
+        width: 150px;
+    }
+
+    /* 
+* Heading styles 
+*/
+    h1 {
+        font-size: 3.2rem;
+        font-weight: 900;
+        margin-bottom: 10px;
+    }
+
+    /* 
+* Paragraph styles 
+*/
+    p {
+        margin-top: 30px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    /* 
+* Email subscription form styling 
+*/
+    .email-form {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .email-form input[type="email"] {
+        padding: 15px;
+        font-size: 1rem;
+        width: 300px;
+        border: 1px solid white;
+        border-radius: 5px;
+        background: transparent;
+    }
+
+    .email-form button {
+        padding: 15px;
+        background-color: #e50914;
+        border: none;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .email-form button:hover {
+        background-color: #f40612;
+    }
+
+    /* 
+* Carousel section to display trending movies 
+*/
+    .carousel-section {
+        width: 80%;
+        padding: 20px;
+        margin: auto;
+    }
+
+    /* 
+* Carousel wrapper for horizontal scrolling of cards 
+*/
+    .carousel-wrapper {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+        margin: auto;
+    }
+    
+    .section-title {
+        margin-left: 12%;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: white;
+        font-weight: bold;
+        /* Customize as needed */
+    }
+    /* 
+* Track that holds the carousel cards 
+*/
+    .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        width: calc(200px * 10);
+        /* 10 cards total */
+    }
+
+    /* 
+* Individual carousel card styling 
+*/
+    .carousel-card {
+        min-width: 19.3%;
+        margin: 0 5px;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* 
+* Image styling within each carousel card 
+*/
+    .carousel-card img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    /* 
+* Card number overlay styling 
+*/
+    .card-number {
+        position: absolute;
+        top: 60%;
+        left: 5px;
+        font-size: 5vw;
+        font-weight: bold;
+        color: #000000;
+        -webkit-text-stroke: 1px rgb(255, 255, 255);
+    }
+
+    /* 
+* Card information section styling 
+*/
+    .card-info {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.7);
+        text-align: center;
+    }
+
+    /* 
+* Information span styling within cards 
+*/
+    .card-info span {
+        color: rgb(255, 255, 255);
+        background: #e50914;
+        padding: 4px 10px;
+        font-size: 1.2vw;
+    }
+
+    /* 
+* Arrow styles for carousel navigation 
+*/
+    .arrow {
+        font-size: 30px;
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        border-radius: 50%;
+        z-index: 100;
+        color: white;
+        /* Ensure the arrows are white */
+    }
+
+    .arrow-left {
+        left: 10px;
+        display: block;
+        /* Ensure it's always visible */
+    }
+
+    .arrow-right {
+        right: 10px;
+        display: block;
+        /* Ensure it's visible */
+    }
+
+    /* 
+* Limit visible cards to 5 in the carousel 
+*/
+    .carousel-wrapper {
+        max-width: calc(200px * 5);
+        /* 5 cards shown at a time */
+    }
+
+
+    @media (max-width: 1224px) {
+
+
+        /* 
+* Individual carousel card styling 
+*/
+        .carousel-card {
+            min-width: 23.4%;
+            margin: 0 5px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+    }
+
+    @media (max-width: 624px) {
+
+
+        /* 
+   * Individual carousel card styling 
+   */
+        .carousel-card {
+            min-width: 34%;
+            margin: 0 5px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+    }
+
+    /* 
+* Features section styles for showcasing key features 
+*/
+    .section-features {
+        width: 80%;
+        padding: 20px;
+        margin: auto;
+    }
+
+    /* 
+* Heading styles for features section 
+*/
+    .section-heading {
+        text-align: center;
+    }
+
+    /* 
+* Grid layout for features cards 
+*/
+    .features-grid {
+        display: flex;
+        gap: 15px;
+        /* Space between cards */
+        justify-content: center;
+        /* Center the cards */
+        align-items: center;
+        /* Align cards vertically */
+        flex-wrap: wrap;
+        /* Allow cards to wrap to the next line */
+    }
+
+    /* 
+* Individual feature card styling 
+*/
+    .feature-card {
+        width: 240px;
+        /* Fixed width for cards */
+        height: 300px;
+        background-color: #1D1932;
+        border-radius: 20px;
+        padding: 30px;
+        flex: 0 0 auto;
+        /* Prevent cards from growing or shrinking */
+    }
+
+    /* 
+* Responsive styles for feature cards on larger screens 
+*/
+    @media (max-width: 1024px) {
+        .feature-card {
+            width: calc(50% - 7.5px);
+            /* Two cards per row with some gap */
+        }
+    }
+
+    /* 
+* Responsive styles for feature cards on smaller screens 
+*/
+    @media (max-width: 768px) {
+        .feature-card {
+            width: 100%;
+            /* Full width for a single card in mobile */
+        }
+    }
+
+    /* 
+* Title styling for features cards 
+*/
+    .feature-title {
+        font-size: 20px;
+        font-weight: 650;
+    }
+
+    /* 
+* Description styling for features cards 
+*/
+    .feature-description {
+        color: #878787;
+    }
+
+    /* 
+* Icon styling for features cards 
+*/
+    .feature-icon {
+        width: 80px;
+        height: 80px;
+        justify-content: flex-end;
+    }
+
+    /* 
+* FAQ section styles for frequently asked questions 
+*/
+    .section-faq {
+        width: 80%;
+        padding: 20px;
+        margin: auto;
+    }
+
+    /* 
+* Heading styles for FAQ section 
+*/
+    .section-heading {
+        text-align: center;
+        font-size: 2rem;
+        /* Increase heading size */
+        color: white;
+    }
+
+    /* 
+* List container for FAQ entries 
+*/
+    .faq-list {
+        display: block;
+        justify-content: center;
+        align-items: center;
+        width: 76%;
+        margin: auto;
+    }
+
+    /* 
+* Individual FAQ entry styling 
+*/
+    .faq-entry {
+        background-color: #333;
+        margin: 10px 0;
+        padding: 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        border: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .faq-entry.active {
+        background-color: #555;
+    }
+
+    /* 
+* Question styling within FAQ entries 
+*/
+    .faq-question {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.2rem;
+        color: white;
+        /* Ensure text is readable */
+    }
+
+    /* 
+* Answer styling within FAQ entries 
+*/
+    .faq-answer {
+        display: none;
+        padding-top: 10px;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #ccc;
+        /* Ensure answer text is readable */
+    }
+
+    .faq-entry.active .faq-answer {
+        display: block;
+    }
+
+    /* 
+* Toggle icon styling for FAQ entries 
+*/
+    .toggle-icon {
+        font-size: 1.2rem;
+    }
+
+    /* 
+* Text styling for questions in FAQ 
+*/
+
+
+    /* Responsive Code for Tablets */
+    @media (max-width: 768px) {
+        .section-faq {
+            width: 90%;
+            /* Adjust width for smaller screens */
+            padding: 15px;
+            /* Less padding on smaller screens */
+        }
+
+        .section-heading {
+            font-size: 1.8rem;
+            /* Decrease heading size */
+        }
+
+        .faq-entry {
+            padding: 10px;
+            /* Reduce padding for smaller screens */
+        }
+
+        .faq-question {
+            font-size: 1rem;
+            /* Slightly smaller font for questions */
+        }
+
+        .faq-answer {
+            font-size: 0.9rem;
+            /* Slightly smaller font for answers */
+        }
+
+        .toggle-icon {
+            font-size: 1rem;
+            /* Smaller toggle icon */
+        }
+    }
+
+    /* Responsive Code for Mobile */
+    @media (max-width: 480px) {
+        .section-faq {
+            width: 95%;
+            /* Full width for mobile */
+            padding: 10px;
+            /* Less padding for mobile */
+        }
+
+        .section-heading {
+            font-size: 1.5rem;
+            /* Further decrease heading size */
+        }
+
+        .faq-entry {
+            margin: 5px 0;
+            /* Reduce space between entries */
+        }
+
+        .faq-question {
+            font-size: 0.9rem;
+            /* Smaller font for questions */
+        }
+
+        .faq-answer {
+            font-size: 0.8rem;
+            /* Smaller font for answers */
+        }
+
+        .toggle-icon {
+            font-size: 0.9rem;
+            /* Smaller toggle icon */
+        }
+    }
+
+
+    /* Subscription section styles */
+    .subscription-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 20px 0;
+        background-color: #000;
+        width: 80%;
+        margin: auto;
+    }
+
+    .subscription-section p {
+        color: white;
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .subscription-form {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+        justify-content: center;
+    }
+
+    .subscription-form input[type="email"] {
+        padding: 15px;
+        font-size: 1rem;
+        width: 300px;
+        border: 1px solid white;
+        border-radius: 5px;
+        background: #333;
+        color: white;
+    }
+
+    .subscription-form button {
+        padding: 15px;
+        background-color: #e50914;
+        border: none;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .subscription-form button:hover {
+        background-color: #f40612;
+    }
+
+    /* Responsive Code for Tablets */
+    @media (max-width: 768px) {
+        .subscription-section {
+            width: 100%;
+            padding: 20px 10px;
+        }
+
+        .subscription-form {
+            flex-direction: column;
+            /* Stack input and button vertically */
+            width: 100%;
+        }
+
+        .subscription-form input[type="email"],
+        .subscription-form button {
+            width: 70%;
+            /* Full width on tablets */
+            margin: auto;
+        }
+
+        .subscription-form input[type="email"] {
+            font-size: 1rem;
+            padding: 12px;
+        }
+
+        .subscription-form button {
+            font-size: 1rem;
+            padding: 12px;
+        }
+
+        .subscription-section p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+    }
+
+
+    /* Footer styles */
+    .site-footer {
+        width: 80%;
+        padding: 20px;
+        margin: auto;
+        background-color: #000;
+    }
+
+    .footer-title {
+        font-size: 1.4rem;
+        margin-left: 12%;
+        margin-bottom: 20px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .footer-links {
+        justify-content: center;
+        align-items: center;
+        width: 76%;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .footer-link-group {
+        width: 25%;
+        /* Four columns for larger screens */
+        margin-bottom: 20px;
+    }
+
+    .footer-link-group a {
+        display: block;
+        color: #888;
+        text-decoration: none;
+        font-size: 0.8rem;
+        margin-bottom: 12px;
+    }
+
+    .footer-link-group a:hover {
+        color: #fff;
+    }
+
+    /* Language selector */
+    .language-dropdown {
+        font-size: 1.4rem;
+        margin: 10px 0 20px 12%;
+        color: white;
+        font-weight: bold;
+    }
+
+    .language-select {
+        padding: 10px 20px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        font-size: 0.9rem;
+    }
+
+    /* Footer bottom text */
+    .footer-copyright {
+        margin-top: 30px;
+        font-size: 0.8rem;
+        color: #888;
+        text-align: center;
+    }
+
+    /* Responsive Code for Tablets */
+    @media (max-width: 768px) {
+        .footer-links {
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .footer-link-group {
+            width: 50%;
+            /* Two columns in block layout */
+            margin-bottom: 20px;
+        }
+
+        .footer-title,
+        .language-dropdown {
+            text-align: center;
+            margin-left: 0;
+        }
+
+        .language-dropdown {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .language-select {
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            width: 200px;
+        }
+
+        .footer-copyright {
+            font-size: 0.8rem;
+            text-align: center;
+        }
+    }
+
+    /* Responsive Code for Mobile */
+    @media (max-width: 480px) {
+        .footer-link-group {
+            width: 100%;
+            /* Single column on mobile */
+            text-align: center;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+        }
+
+        .footer-link-group a {
+            font-size: 0.9rem;
+        }
+
+        .language-select {
+            width: 100%;
+            padding: 10px;
+            font-size: 0.8rem;
+            margin: 0 auto;
+            /* Center the selector */
+        }
+
+        .footer-copyright {
+            font-size: 0.7rem;
+            text-align: center;
+            margin-top: 20px;
+        }
+    }
+
+
+
+
+
+   
