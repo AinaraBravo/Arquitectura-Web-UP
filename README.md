@@ -9,11 +9,8 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
 ## Funcionalidades de la página web 📌
 - *Gestión de usuarios*: Registro, inicio de sesión, actualización de perfil, recuperación de contraseña, etc.
 - *Gestión de películas*: Búsqueda, filtrado, detalles de películas, recomendaciones, listas de favoritos, calificaciones, comentarios, etc.
-- *Gestión de horarios y salas*: Consulta de horarios, salas cercanas, etc.
+- *Gestión de salas*: Consulta de salas cercanas.
 - *Administración*: Gestión de contenidos, obtener reportes, crear una nueva pelicula, eliminar un usuario, agregar una nueva plataforma, etc.
-- *Social*: Compartir listas y descubrimientos en redes sociales.
-- *Notificaciones*: Aviso sobre nuevas películas, estrenos y recomendaciones personalizadas.
-
 
 ## Entidades y Relaciones
 ### Entidades 🖱️
@@ -42,7 +39,6 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
 ## Manejo de los objetos con protocolo HTTP 🌐
 ### Gestión de usuarios
 
-
 1. Crear un nuevo usuario:
   - Endpoint: /API/Usuarios
   - Método: POST
@@ -64,28 +60,7 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
        "error": "El campo 'contraseña' es obligatorio"
      }
 
-
-2. Actualizar la información de un usuario:
-  - Endpoint: /API/Usuarios/{id_usuario}
-  - Método: PUT
-  - Código de estado:
-     - 200 OK: Si la información del usuario se actualiza correctamente.
-     - 404 Not Found: Si no se encuentra el usuario con el ID especificado.
-400 Bad Request: Si hay algún error de validación.
-     - 500 Internal Server Error: Si ocurre un error interno en el servidor.
-  - Respuesta:
-    * Respuesta exitosa (200 OK) *
-     {
-       "message": "Usuario actualizado correctamente"
-     }
-    
-    * Respuesta de error (404 Not Found) *
-     {
-       "error": "Usuario no encontrado"
-     }
-
-
-3. Iniciar sesión:
+2. Iniciar sesión:
   - Endpoint: /API/Usuarios/login
   - Método: POST
   - Cuerpo: email, contrasenia
@@ -106,6 +81,7 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
          "error": "Credenciales inválidas"
     
        }
+      
 4. Recuperar contraseña:
   - Endpoint: /API/Usuarios/recuperar_contrasena
   - Método: POST
@@ -232,28 +208,6 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
      ]
 
 
-2. Obtener horarios de una película en una sala de cine:
-   - Endpoint: /API/Peliculas/{id_pelicula}/Horarios
-   - Método: GET
-   - Códigos de estado:
-       - 200 OK: Se encontraron horarios disponibles para la película en la sala de cine especificada.
-       - 404 Not Found: La película o la sala de cine no existen, o no hay horarios disponibles para esa película en esa sala.
-       - 500 Internal Server Error: Ocurrió un error interno en el servidor al obtener los horarios.
-   - Respuesta:
-     [
-       {
-           "hora": "19:00",
-           "sala": "Sala 1",
-           "precio": 8.50
-       },
-       {
-           "hora": "21:30",
-           "sala": "Sala 3",
-           "precio": 10.00
-       }
-    ]
-
-
 ### Administración
 1. Agregar una película:
    - Endpoint: /API/Peliculas
@@ -272,7 +226,6 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
        // ... otros campos
      }
 
-
 2. Eliminar una película:
    - Endpoint: /API/Peliculas/{id_peliculas}
    - Método: DELETE
@@ -281,71 +234,8 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
        - 404 Not Found: La película con el ID especificado no existe.
        - 403 Forbidden: El usuario no tiene permisos para eliminar la película.
        - 500 Internal Server Error: Ocurrió un error interno en el servidor.
-3. Obtener el historial de visualizaciones de un usuario:
-   - Endpoint: /API/Usuarios/{id}/historial
-   - Método: GET
-   - Códigos de estado:
-       - 200 OK: Se devolvió el historial de visualizaciones del usuario.
-       - 404 Not Found: El usuario con el ID especificado no existe.
-       - 500 Internal Server Error: Ocurrió un error interno al obtener el historial.
-   - Respuesta:
-       [
-           {
-               "peliculaId": 123,
-               "titulo": "La película",
-               "fechaVisualizacion": "2023-11-22"
-           },
-           // ... otras visualizaciones
-       ]
 
 
-### Social
-1. Compartir en redes sociales:
-   - Endpoint: /API/Peliculas/{id_pelicula}/compartir
-   - Método: POST
-   - Código de estado:
-     - 200 OK: Si la solicitud se procesó correctamente y se envió la solicitud a la red social.
-     - 400 Bad Request: Si falta algún dato en la solicitud o si el formato es incorrecto.
-     - 500 Internal Server Error: Si ocurre un error interno al procesar la solicitud.
-
-
-### Notificaciones
-1. Subscribirse a un tipo de notificación:
-   - Endpoint: /API/Usuarios/{id_usuario}/suscripciones
-   - Método: POST
-   - Código de estado:
-       - 201 Created: La suscripción se creó correctamente.
-       - 400 Bad Request: Si falta algún dato en la solicitud o si el formato es incorrecto.
-       - 404 Not Found: El usuario no existe.
-       - 409 Conflict: Ya existe una suscripción con las mismas características.
-       - 500 Internal Server Error: Si ocurre un error interno al crear la suscripción.
-   - Respuesta:
-     {
-       "id": 123,
-       "tipo": "nueva_pelicula",
-       "genero": "ciencia_ficcion"
-     }
-  
-2. Eliminar una suscripcion:
-   - Endpoint: /API/Usuarios/{id_usuario}/suscripciones/{id_suscripcion}
-   - Método: DELETE
-   - Código de estado:
-       - 204 No Content: La suscripción se eliminó correctamente.
-       - 404 Not Found: La suscripción o el usuario no existen.
-       - 403 Forbidden: El usuario no tiene permisos para eliminar la suscripción.
-       - 500 Internal Server Error: Si ocurre un error interno al eliminar la suscripción.
-3. Enviar una notificación a un usuario:
-   - Endpoint: /API/notificaciones
-   - Método: POST
-   - Código de estado:
-       - 202 Accepted: La notificación ha sido aceptada para su envío (no garantiza que se haya enviado con éxito).
-       - 400 Bad Request: Si falta algún dato en la solicitud o si el formato es incorrecto.
-       - 404 Not Found: El usuario no existe.
-       - 500 Internal Server Error: Si ocurre un error interno al enviar la notificación.
-   - Respuesta:
-     {
-       "mensaje": "La notificación ha sido enviada para su procesamiento"
-     }
           
 ## Diseño de la Página Web 🚀
 La página web podría tener las siguientes secciones:
