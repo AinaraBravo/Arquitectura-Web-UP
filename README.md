@@ -247,4 +247,4 @@ La página web podría tener las siguientes secciones:
 
 
 ## Consideraciones Adicionales
-- Integración con APIs de terceros: Para obtener información de películas de bases de datos externas (e.g., TMDB) y actualizar automáticamente la información.
+- Integración con APIs de terceros: Para obtener información de latitudes y longitudes de la ubicación de las salas de cine y del usuario. 
