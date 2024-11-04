@@ -22,7 +22,7 @@
 * Outer div for the full background, with a background image 
 */
     .background {
-        background: url('images/bg.jpg') no-repeat center center/cover;
+        background: url('pagina_inicio.jpg') no-repeat center center/cover;
         position: relative;
         height: 100%;
     }
@@ -350,16 +350,16 @@
     /* 
 * Individual feature card styling 
 */
-    .feature-card {
-        width: 240px;
-        /* Fixed width for cards */
-        height: 300px;
-        background-color: #1D1932;
-        border-radius: 20px;
-        padding: 30px;
-        flex: 0 0 auto;
-        /* Prevent cards from growing or shrinking */
-    }
+.feature-card {
+    width: 240px;
+    height: 300px;
+    background-color: #1D1932;
+    border-radius: 20px;
+    padding: 20px;
+    flex: 0 0 auto;
+}
+
+
 
     /* 
 * Responsive styles for feature cards on larger screens 

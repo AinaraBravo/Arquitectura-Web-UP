@@ -3,11 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('addMovieBtn').addEventListener('click', async () => {
         const nombre = document.getElementById('nombreSalaAgregar').value.trim();
         const direccion = document.getElementById('direccionSalaAgregar').value.trim();
-        const barrio = document.getElementById('barrioSalaAgregar').value.trim();
         const url = document.getElementById('urlSalaAgregar').value.trim();
 
-        if (!nombre || !direccion || !barrio) {
-            alert('Por favor, completa todos los campos obligatorios (nombre, dirección y barrio).');
+        if (!nombre || !direccion ) {
+            alert('Por favor, completa todos los campos obligatorios (nombre, dirección).');
             return;
         }
 
@@ -17,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ nombre, direccion, barrio, url })
+                body: JSON.stringify({ nombre, direccion, url })
             });
 
             const result = await response.json();

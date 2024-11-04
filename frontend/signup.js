@@ -9,18 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const nombre = document.getElementById('nameInput').value;
         const email = document.getElementById('emailInput').value;
         const contrasenia = document.getElementById('passwordInput').value;
-
+        const plan = document.getElementById('planSelect').value;
         // Crear el objeto de datos
         const userData = {
             nombre: nombre,
             email: email,
             contrasenia: contrasenia,
-            rol: 'usuario' // Puedes cambiar el rol si es necesario
+            rol: 'usuario',// Puedes cambiar el rol si es necesario
+            plan:plan
         };
 
         try {
             // Enviar la solicitud al backend
-            const response = await fetch('http://localhost:4000/Usuarios', {
+            const response = await fetch('http://localhost:4000/usuarios', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

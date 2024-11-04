@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             peliculaCard.classList.add('pelicula');
 
             peliculaCard.innerHTML = `
-                <img src="poster${1}.jpg" alt="${pelicula.titulo}"> <!-- Asegúrate de tener las imágenes de los pósters -->
+                <img src="poster${pelicula.id_pelicula}.jpg" alt="${pelicula.titulo}">
                 <h2>${pelicula.titulo}</h2>
                 <p><strong>Género:</strong> ${pelicula.genero}</p>
                 <p><strong>Año:</strong> ${pelicula.año}</p>
@@ -249,7 +249,7 @@ function mostrarResultadoPelicula(pelicula) {
     const resultContainer = document.getElementById('peliculasContainer');
     const peliculaDiv = document.createElement('div');
     peliculaDiv.innerHTML = `
-        <img src="poster${1}.jpg" alt="${pelicula.titulo}"> <!-- Asegúrate de tener las imágenes de los pósters -->
+        <img src="poster${pelicula.id_pelicula}.jpg" alt="${pelicula.titulo}">
         <h2>${pelicula.titulo}</h2>
         <p><strong>Género:</strong> ${pelicula.genero}</p>
         <p><strong>Año:</strong> ${pelicula.año}</p>
@@ -286,7 +286,7 @@ function mostrarResultadosGeneros(peliculas) {
     peliculas.forEach(pelicula => {
         const peliculaDiv = document.createElement('div');
         peliculaDiv.innerHTML = `
-            <img src="poster${1}.jpg" alt="${pelicula.titulo}"> <!-- Asegúrate de tener las imágenes de los pósters -->
+            <img src="poster${pelicula.id_pelicula}.jpg" alt="${pelicula.titulo}">
             <h2>${pelicula.titulo}</h2>
             <p><strong>Género:</strong> ${pelicula.genero}</p>
             <p><strong>Año:</strong> ${pelicula.año}</p>

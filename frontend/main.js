@@ -17,22 +17,32 @@ async function fetchMovies() {
 }
 
 // Función para mostrar las películas en la tabla
+// Función para mostrar las películas en la tabla
+// Función para mostrar las películas en la tabla
 function displayMovies(movies) {
     const tableBody = document.getElementById('peliculasTable');
     tableBody.innerHTML = ''; // Limpiar la tabla antes de agregar nuevas filas
 
     movies.forEach(pelicula => {
+        // Asegúrate de que plataformas y salas tengan valores
+        const plataformasDisplay = pelicula.plataformas && pelicula.plataformas.trim() !== "" ? pelicula.plataformas : "No disponible";
+        const salasDisplay = pelicula.salas && pelicula.salas.trim() !== "" ? pelicula.salas : "No disponible";
+
         const row = `
             <tr>
                 <td>${pelicula.titulo}</td>
                 <td>${pelicula.genero}</td>
                 <td>${pelicula.duracion} min</td>
-                <td>${pelicula.plataformas || "No disponible"}</td>
+                <td>${plataformasDisplay}</td>
+                <td>${salasDisplay}</td>
             </tr>
         `;
         tableBody.innerHTML += row; // Agregar fila a la tabla
     });
 }
+
+
+
 
 // Función para filtrar películas según el valor seleccionado
 function filterMovies() {
@@ -130,6 +140,7 @@ function displayCinemas(cinemas) {
     cinemas.forEach(sala => {
         const row = `
             <tr>
+                <td>${sala.id_sala_de_cine}</td>
                 <td>${sala.nombre}</td>
                 <td>${sala.direccion}</td>
             </tr>
