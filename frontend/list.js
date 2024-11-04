@@ -1,17 +1,34 @@
+async function manejarEntradaCorreo() {
+    const email = document.getElementById('emailInput').value; // Obtener el correo ingresado por el usuario
+    if (!email) {
+        alert("Por favor, ingresa tu correo electrónico.");
+        return; // Detener si no se ingresó el correo
+    }
+    
+    console.log("Correo ingresado:", email); // Verificar el correo ingresado
+    // Cargar favoritos utilizando el correo
+    await cargarFavoritos(email);
+}
+
 // Función para cargar las películas favoritas del usuario
 async function cargarFavoritos(email) {
     const container = document.getElementById('favoritosContainer');
     const favoritosList = document.getElementById('favoritosList');
     favoritosList.innerHTML = ''; // Limpiar el contenedor antes de agregar nuevas películas
     container.style.display = 'block'; // Mostrar el contenedor de favoritos
+    
+    // Verifica la URL antes de hacer la solicitud
+    const url = `http://localhost:4000/usuarios/${email}/favoritos`;
+    console.log("URL de la solicitud:", url); 
 
     try {
         // Obtener las películas favoritas usando el correo del usuario
-        const response = await fetch(`http://localhost:4000/Usuarios/${email}/favoritos`);
+        const response = await fetch(url);
         if (!response.ok) {
             throw new Error('Error al cargar las películas favoritas');
         }
         const peliculasFavoritas = await response.json();
+        console.log("Películas favoritas obtenidas:", peliculasFavoritas); // Verifica las películas obtenidas
 
         if (peliculasFavoritas.length === 0) {
             favoritosList.innerHTML = '<p>No tienes películas favoritas.</p>'; // Mensaje si no hay favoritos
@@ -28,17 +45,7 @@ async function cargarFavoritos(email) {
     }
 }
 
-// Función para manejar la entrada del correo y cargar favoritos
-async function manejarEntradaCorreo() {
-    const email = document.getElementById('emailInput').value; // Obtener el correo ingresado por el usuario
-    if (!email) {
-        alert("Por favor, ingresa tu correo electrónico.");
-        return; // Detener si no se ingresó el correo
-    }
-    
-    // Cargar favoritos utilizando el correo
-    await cargarFavoritos(email);
-}
+
 
 // Función para crear la tarjeta de una película
 function crearTarjetaPelicula(pelicula) {

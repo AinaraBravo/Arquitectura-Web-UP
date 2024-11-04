@@ -74,9 +74,13 @@ async function cargarPeliculas() {
         container.addEventListener('click', async (event) => {
             if (event.target.closest('.favoritos-btn')) {
                 const id_pelicula = event.target.closest('.favoritos-btn').dataset.id; // Obtener el ID de la película del botón
+                
+                // Limpia el correo almacenado antes de solicitar uno nuevo
+                localStorage.removeItem('userCorreo');
                 let userCorreo = localStorage.getItem('userCorreo'); // Recupera el correo almacenado
                 console.log("Correo recuperado:", userCorreo);
                 
+                // Si no hay correo almacenado, pide al usuario que lo ingrese
                 if (!userCorreo) {
                     userCorreo = prompt("Por favor, ingresa tu correo para agregar a favoritos:");
                     if (!userCorreo) {

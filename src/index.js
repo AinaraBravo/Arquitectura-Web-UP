@@ -109,8 +109,7 @@ app.get("/peliculas", async (req, res) => {
     }
 });
 
-
-/*NO LO APLICAMOS AUN EN EL FRONTEND*/
+/*SI LO APLICAMOS AUN EN EL FRONTEND*/
 app.get("/peliculas/nombre/:nombre", async (req, res) => {
     const { nombre } = req.params; // Obtiene el nombre de la película de la URL
 
@@ -131,7 +130,7 @@ app.get("/peliculas/nombre/:nombre", async (req, res) => {
     }
 });
 
-/*NO LO APLICAMOS AUN EN EL FRONTEND*/
+/*SI LO APLICAMOS AUN EN EL FRONTEND*/
 app.get("/peliculas/genero/:genero", async (req, res) => {
     const { genero } = req.params; // Obtiene el genero desde la URL
     try {
@@ -159,7 +158,7 @@ app.get("/peliculas/genero/:genero", async (req, res) => {
     }
 });
 
-/*NO LO APLICAMOS AUN EN EL FRONTEND*/
+/*SI LO APLICAMOS AUN EN EL FRONTEND*/
 app.post("/usuarios/:correo/favoritos", async (req, res) => {
     const correo = req.params.correo; // Obtiene el correo del usuario desde la URL
     const { id_pelicula } = req.body; // Obtiene el ID de la película desde el cuerpo de la solicitud
@@ -199,7 +198,7 @@ app.post("/usuarios/:correo/favoritos", async (req, res) => {
 });
 
 
-/*NO LO APLICAMOS AUN EN EL FRONTEND*/
+/*SI LO APLICAMOS AUN EN EL FRONTEND*/
 app.get("/usuarios/:email/favoritos", async (req, res) => {
     const emailUser = req.params.email; // Obtiene el email del usuario desde la URL
 
@@ -255,7 +254,6 @@ app.get("/usuarios/:email/favoritos", async (req, res) => {
 });
 
 
-
 // Endpoint para obtener el ID del usuario basado en el correo
 app.get('/usuarios/correo/:email', async (req, res) => {
     const email = req.params.email;
@@ -279,7 +277,6 @@ app.get('/usuarios/correo/:email', async (req, res) => {
         res.status(500).json({ message: 'Error en el servidor' });
     }
 });
-
 
 
 /*SI LO APLICAMOS AUN EN EL FRONTEND*/
@@ -335,7 +332,6 @@ app.post('/usuarios', async (req, res) => {
 });
 
 /*SI LO APLICAMOS AUN EN EL FRONTEND*/
-// Endpoint para obtener todos los usuarios
 app.get('/usuarios', async (req, res) => {
     try {
         const connection = await database.getConnection();
@@ -350,7 +346,7 @@ app.get('/usuarios', async (req, res) => {
     }
 });
 
-// Endpoint para eliminar un usuario por email
+/*SI LO APLICAMOS AUN EN EL FRONTEND*/
 app.delete('/usuarios/email/:email', async (req, res) => {
     const email = req.params.email;
     try {
@@ -368,6 +364,7 @@ app.delete('/usuarios/email/:email', async (req, res) => {
     }
 });
 
+/*SI LO APLICAMOS AUN EN EL FRONTEND*/
 app.put('/usuarios/email/:email', async (req, res) => {
     const email = req.params.email;
     const { planNuevo } = req.body; // Captura el nuevo plan del cuerpo de la solicitud
@@ -453,9 +450,7 @@ app.put("/peliculas/nombre/:nombre_pelicula", authenticateJWT, async (req, res) 
 });
 
 
-
-
-/*NO LO APLICAMOS AUN EN EL FRONTEND*/
+/*SI LO APLICAMOS AUN EN EL FRONTEND*/
 app.put('/usuarios/:email/cambiar-contrasenia', async (req, res) => {
     const { email } = req.params; // Obtiene el email del usuario desde la URL
     const { nueva_contrasenia } = req.body; // Obtiene la nueva contraseña desde el cuerpo de la solicitud
@@ -493,7 +488,6 @@ app.put('/usuarios/:email/cambiar-contrasenia', async (req, res) => {
         res.status(500).json({ message: "Error al actualizar la contraseña." });
     }
 });
-
 
 
 // Clave secreta para firmar los tokens
@@ -551,7 +545,7 @@ app.post('/usuarios/login', async (req, res) => {
 })
 
 
-/*NO LO APLICAMOS AUN EN EL FRONTEND*/
+/*SI LO APLICAMOS AUN EN EL FRONTEND*/
 app.post("/peliculas/:id/calificar", async (req, res) => {
     const { id } = req.params;
     const { calificacion } = req.body;
@@ -650,7 +644,7 @@ app.get("/peliculas/mejores-calificaciones/:anio", async (req, res) => {
     }
 });
 
-/*NO LO APLICAMOS AUN EN EL FRONTEND*/
+/*SI LO APLICAMOS AUN EN EL FRONTEND*/
 app.get("/peliculas/:id/comentarios", async (req, res) => {
     const { id } = req.params;
 
@@ -815,7 +809,6 @@ app.post("/peliculas", authenticateJWT, async (req, res) => {
 });
 
 
-
 /*SI LO APLICAMOS AUN EN EL FRONTEND*/
 app.delete("/peliculas/nombre/:nombre_pelicula", authenticateJWT, async (req, res) => {
     const nombre_pelicula = req.params.nombre_pelicula.trim(); // Elimina espacios en blanco
@@ -895,7 +888,7 @@ app.get("/peliculas/actor/:nombre", async (req, res) => {
 });
 
 
-/*NO LO APLICAMOS AUN EN EL FRONTEND*/
+/*SI LO APLICAMOS AUN EN EL FRONTEND*/
 app.get("/peliculas/:id/disponibilidad", async (req, res) => {
     const { id } = req.params; // Obtiene el ID de la película de la URL
 
@@ -920,7 +913,7 @@ app.get("/peliculas/:id/disponibilidad", async (req, res) => {
     }
 });
 
-/*NO LO APLICAMOS AUN EN EL FRONTEND*/
+/*SI LO APLICAMOS AUN EN EL FRONTEND*/
 app.get("/plataformas", async (req, res) => {
     try {
         const connection = await database.getConnection();
@@ -931,7 +924,6 @@ app.get("/plataformas", async (req, res) => {
         res.status(500).json({ message: "Error interno del servidor." });
     }
 });
-
 
 
 /*SI LO APLICAMOS AUN EN EL FRONTEND*/
@@ -948,12 +940,9 @@ app.get("/salas", async (req, res) => {
     }
 });
 
-
-
-
 const apiKey = 'pk.d3a2ba95ea88dcdcfbe3e45acb0c9f19'; // Reemplaza con tu clave real
 
-
+/*SI LO APLICAMOS AUN EN EL FRONTEND*/
 app.post('/salas', async (req, res) => {
     const { nombre, direccion, url } = req.body;
     const apiKey = 'pk.d3a2ba95ea88dcdcfbe3e45acb0c9f19';
@@ -1118,6 +1107,7 @@ app.delete('/plataformas', async (req, res) => {
     }
 });
 
+/*SI LO APLICAMOS AUN EN EL FRONTEND*/
 app.get('/plataformas', async (req, res) => {
     try {
         const connection = await database.getConnection();

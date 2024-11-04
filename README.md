@@ -40,7 +40,7 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
 ### Gestión de usuarios
 
 1. Crear un nuevo usuario:
-  - Endpoint: /API/Usuarios
+  - Endpoint: /usuarios
   - Método: POST
   - Cuerpo: nombre,email, contrasenia
   - Código de estado:
@@ -61,7 +61,7 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
      }
 
 2. Iniciar sesión:
-  - Endpoint: /API/Usuarios/login
+  - Endpoint: /usuarios/login
   - Método: POST
   - Cuerpo: email, contrasenia
   - Código de estado:
@@ -82,23 +82,66 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
     
        }
       
-4. Recuperar contraseña:
-  - Endpoint: /API/Usuarios/recuperar_contrasena
-  - Método: POST
-  - Cuerpo: email
+4. Cambiar contraseña:
+  - Endpoint: /usuarios/cambiar-contrasenia
+  - Método: PUT
+  - Cuerpo: nuevo contraseña
   - Código de estado:
-     - 200 OK: Si se envía un correo electrónico con las instrucciones para restablecer la contraseña.
+     - 200 OK: Contraseña actualizada.
      - 404 Not Found: Si no se encuentra el usuario con el email especificado.
      - 400 Bad Request: Si el formato del email es inválido.
      - 500 Internal Server Error: Si ocurre un error interno en el servidor.
-      
+
+5. Eliminar un Usuario
+* Endpoint: /usuarios/email/:email
+* Método: DELETE
+* Parámetros:
+email (en la URL): El correo electrónico del usuario que se desea eliminar.
+* Código de Estado:
+  * 200 OK: Se devuelve cuando el usuario ha sido eliminado exitosamente.
+  * Mensaje: Usuario con email [email] eliminado.
+  * 404 Not Found: Se devuelve si no se encuentra un usuario con el correo electrónico proporcionado.Mensaje: Usuario no encontrado.
+  * 500 Internal Server Error: Se devuelve si ocurre un error en el servidor al intentar eliminar el usuario. Mensaje: Error en el servidor.
+
+6. Actualizar el Plan de un Usuario
+* Endpoint: /usuarios/email/:email
+* Método: PUT
+* Parámetros:
+email (en la URL): El correo electrónico del usuario cuyo plan se desea actualizar.
+* Cuerpo de la Solicitud:
+Un objeto JSON que debe incluir:
+planNuevo: El nuevo plan que se asignará al usuario.
+* Código de Estado:
+  * 200 OK: Se devuelve cuando el plan del usuario ha sido actualizado exitosamente.
+  * 404 Not Found: Se devuelve si no se encuentra un usuario con el correo electrónico proporcionado.* 500 Internal Server Error: Se devuelve si ocurre un error en el servidor al intentar actualizar el plan del usuario.
+
+7. Agregar una Película a Favoritos
+* Endpoint: /usuarios/:correo/favoritos
+* Método: POST
+* Parámetros:
+correo (en la URL): El correo electrónico del usuario que quiere agregar una película a favoritos.
+* Código de Estado:
+  * 200 OK: Se devuelve cuando la película se ha agregado exitosamente a la lista de favoritos.
+  * 400 Bad Request: Se devuelve si la película ya está en la lista de favoritos.
+  404 Not Found: Se devuelve si no se encuentra el usuario o la película especificada.
+  * 500 Internal Server Error: Se devuelve si ocurre un error en el servidor al intentar agregar la película.
+
+8. Obtener las Películas Favoritas de un Usuario
+* Endpoint: /usuarios/:email/favoritos
+* Método: GET
+* Parámetros:
+email (en la URL): El correo electrónico del usuario cuyas películas favoritas se desean obtener.
+* Código de Estado:
+  * 200 OK: Se devuelve una lista de las películas favoritas del usuario.
+  * 404 Not Found: Se devuelve si no se encuentra el usuario.
+  * 500 Internal Server Error: Se devuelve si ocurre un error en el servidor al intentar obtener las películas favoritas.
+
 ### Gestión de peliculas
 1. Obtener detalles de una película:
-   - Endpoint: /API/Peliculas/{id_pelicula}
+   - Endpoint: /peliculas
    - Método: GET
    - Códigos de estado:
        - 200 OK: La película se encontró y se devolvieron sus detalles.
-       - 404 Not Found: La película con el ID especificado no existe.
        - 500 Internal Server Error: Ocurrió un error interno en el servidor al intentar obtener los datos.
    - Respuesta:
      * Respuesta exitosa (200 OK) *
@@ -112,7 +155,7 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
 
 
 2. Buscar una película por género:
-   - Endpoint: /API/Peliculas?genero={genero}
+   - Endpoint: /peliculas/genero/:genero
    - Método: GET
    - Códigos de estado:
        - 200 OK: Se encontró al menos una película del género especificado y se devolvió una lista.
@@ -133,8 +176,36 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
        }
      ]
 
+2. Buscar una película por nombre:
+   - Endpoint: /peliculas/genero/:nombre
+   - Método: GET
+   - Códigos de estado:
+       - 200 OK: Se encontró la pelicula. 
+       - 404 Not Found: No se encontró la pelicula.
+       - 500 Internal Server Error: Ocurrió un error interno en el servidor al realizar la búsqueda.
+   - Respuesta:
+     * Respuesta exitosa (200 OK) *
+       {
+         "id": 1,
+         "titulo": "El Padrino",
+         "genero": "Drama"
+       },
+       
+3. Actualizar una película por nombre:
+* Endpoint: /peliculas/nombre/:nombre_pelicula
+* Método: PUT
+* Códigos de estado:
+  * 200 OK: La película se actualizó exitosamente.
+  * 404 Not Found: No se encontró la película con el nombre especificado.
+  * 400 Bad Request: El género proporcionado no es válido.
+  *500 Internal Server Error: Ocurrió un error interno en el servidor al intentar actualizar la película.
+* Respuesta:
+  * Respuesta exitosa (200 OK)
+  * Respuesta de error (404 Not Found)
+  * Respuesta de error (400 Bad Request)
+  * Respuesta de error (500 Internal Server Error)
 
-3. Agregar una película a la lista de favoritos de un usuario:
+4. Agregar una película a la lista de favoritos de un usuario:
    - Endpoint: /API/Usuarios/{id}/favoritos
    - Método: POST
    - Cuerpo: id_pelicula
@@ -149,9 +220,8 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
        "message": "Película agregada a favoritos"
      }
 
-
-4. Calificar una película:
-   - Endpoint: /API/Peliculas/{id}/calificar
+5. Calificar una película:
+   - Endpoint: peliculas/{id}/calificar
    - Método: POST
    - Cuerpo: calificacion
    - Códigos de estado:
@@ -166,8 +236,34 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
        "message": "Calificación registrada"
      }
 
+6. Registrar un comentario para una película:
+* Endpoint: /peliculas/:id/comentarios
+* Método: POST
+* Códigos de estado:
+  * 200 OK: El comentario se registró exitosamente.
+  * 404 Not Found: La película con el ID especificado no existe.
+  * 400 Bad Request: El comentario proporcionado está vacío.
+  * 500 Internal Server Error: Ocurrió un error interno en el servidor al intentar registrar el comentario.
+* Respuesta:
+  * Respuesta exitosa (200 OK)
+  * Respuesta de error (404 Not Found)
+  * Respuesta de error (400 Bad Request)
+  * Respuesta de error (500 Internal Server Error)
 
-5. Obtener recomendaciones de una película:
+7. Obtener comentarios de una película por ID:
+* Endpoint: /peliculas/:id/comentarios
+* Método: GET
+* Códigos de estado:
+  * 200 OK: Se encontraron los comentarios para la película especificada.
+  * 404 Not Found: No se encontraron comentarios para la película especificada.
+  * 500 Internal Server Error: Ocurrió un error interno en el servidor al realizar la consulta.
+* Respuesta:
+  * Respuesta exitosa (200 OK)
+  * Respuesta de error (404 Not Found)
+  * Respuesta de error (400 Bad Request)
+  * Respuesta de error (500 Internal Server Error)
+
+8. Obtener recomendaciones de una película:
    - Endpoint: /API/Peliculas/recomendaciones
    - Método: GET
    - Códigos de estado:
@@ -184,58 +280,112 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
        },
        // ... otras recomendaciones
      ]
-   
-### Gestión de horarios y salas
-1. Obtener las salas de cine cercanas a una ubicación:
-   - Endpoint: /API/Salas_De_Cine?latitud={lat}&longitud={lon}
-   - Método: GET
-   - Códigos de estado:
-       - 200 OK: Se encontró al menos una sala de cine cerca de la ubicación especificada y se devolvió una lista.
-       - 404 Not Found: No se encontraron salas de cine cerca de la ubicación especificada.
-       - 500 Internal Server Error: Ocurrió un error interno en el servidor al realizar la búsqueda.
-   - Respuesta:
-     * Respuesta exitosa (200 OK) *
-     [
-       {
-         "id": 1,
-         "nombre": "Cinepolis",
-         "direccion": "Avenida Siempreviva 123",
-         "latitud": -33.4167,
-         "longitud": -70.6167,
-         "distancia": 1.5 // En kilómetros
-       },
-       // ... otras salas
-     ]
+    
+9. Agregar una nueva Película:
+* Endpoint: /peliculas
+* Método: POST
+* Autenticación: authenticateJWT (requiere que el usuario esté autenticado)
+* Codigo de estado:
+  *200 OK: Pelicula agregada.
+  *500: Ocurrio un error en el servidor.
+
+10. Eliminar una nueva Película:
+* Endpoint: /peliculas/nombre/:nombre_pelicula
+* Método: DELETE
+* Autenticación: authenticateJWT (requiere que el usuario esté autenticado)
+* Codigo de estado:
+  *200 OK: Pelicula agregada.
+  *500: Ocurrio un error en el servidor.
+* Respuesta:
+  * Respuesta exitosa (200 OK)
+  * Respuesta de error (500 Internal Server Error)
+
+11. Obtener Disponibilidad de una Película:
+* Endpoint: /peliculas/:id/disponibilidad
+* Método: GET
+* Códigos de estado:
+  * 200 OK: Se encontraron los disponibilidades para la película especificada.
+  * 404 Not Found: No se encontraron peliculas.
+  * 500 Internal Server Error: Ocurrió un error interno en el servidor al realizar la consulta.
+* Respuesta:
+  * Respuesta exitosa (200 OK)
+  * Respuesta de error (404 Not Found)
+  * Respuesta de error (400 Bad Request)
+  * Respuesta de error (500 Internal Server Error)
+
+### Gestión de plataformas online
+1. Obtener la Lista de Plataformas
+* Endpoint: /plataformas
+* Método: GET
+* Código de Estado:
+  * 200 OK: Se devuelve exitosamente la lista de plataformas.
+  * 500 Internal Server Error: Se devuelve si ocurre un error en el servidor al intentar obtener la lista de plataformas.
+
+2. Agregar una Nueva Plataforma
+* Endpoint: /plataformas
+* Método: POST
+* Código de Estado:
+  * 201 Created: Se devuelve cuando la plataforma ha sido agregada exitosamente.
+  * 400 Bad Request: Se devuelve si el nombre de la plataforma no ha sido proporcionado.
+  * 500 Internal Server Error: Se devuelve si ocurre un error en el servidor al intentar agregar la plataforma.
+
+3. Eliminar una Plataforma Online
+* Endpoint: /plataformas
+* Método: DELETE
+* Códigos de Estado:
+  * 200 OK: Plataforma eliminada exitosamente.
+  * 400 Bad Request: Falta el nombre de la plataforma en la solicitud.
+  * 404 Not Found: No se encontró la plataforma especificada en la base de datos.
+  * 500 Internal Server Error: Error en el servidor durante la operación de eliminación.
 
 
-### Administración
-1. Agregar una película:
-   - Endpoint: /API/Peliculas
-   - Método: POST
-   - Cuerpo: título, género, año, director, actores, sinopsis, duración.
-   - Códigos de estado:
-       - 201 Created: La película se creó correctamente.
-       - 400 Bad Request: Faltan datos obligatorios o hay un formato incorrecto.
-       - 409 Conflict: Ya existe una película con el mismo título.
-       - 500 Internal Server Error: Ocurrió un error interno en el servidor.
-   - Respuesta:
-     {
-       "id": 123,
-       "titulo": "La película",
-       "genero": "Drama",
-       // ... otros campos
-     }
+4. Obtener la Lista de Plataformas Online
+* Endpoint: /plataformas
+* Método: GET
+* Código de Estado:
+  * 200 OK: Se devuelve cuando se obtiene exitosamente la lista de plataformas online.
+  * 500 Internal Server Error: Se devuelve si ocurre un error en el servidor al intentar obtener las plataformas.
 
-2. Eliminar una película:
-   - Endpoint: /API/Peliculas/{id_peliculas}
-   - Método: DELETE
-   - Códigos de estado:
-       - 204 No Content: La película se eliminó correctamente (no se devuelve cuerpo en la respuesta).
-       - 404 Not Found: La película con el ID especificado no existe.
-       - 403 Forbidden: El usuario no tiene permisos para eliminar la película.
-       - 500 Internal Server Error: Ocurrió un error interno en el servidor.
+### Gestión de salas de cine 
+1. Obtener Salas de Cine:
+* Endpoint: /salas
+* Método: GET
+* Códigos de estado:
+  * 200 OK: Se encontraron los salas de cine.
+  * 500 Internal Server Error: Ocurrió un error interno en el servidor al realizar la consulta.
+* Respuesta:
+  * Respuesta exitosa (200 OK)
+  * Respuesta de error (500 Internal Server Error)
 
+2. Agregar una sala de cine:
+* Endpoint: /salas
+* Método: POST
+* Codigo de estado:
+  *200 OK: Sala de cine agregada.
+  *500: Ocurrio un error en el servidor.
+* Respuesta:
+  * Respuesta exitosa (200 OK)
+  * Respuesta de error (500 Internal Server Error)
 
+3. Eliminar una sala de cine:
+* Endpoint: /salas
+* Método: DELETE
+* Codigo de estado:
+  *200 OK: Sala de cine eliminada.
+  *500: Ocurrio un error en el servidor.
+* Respuesta:
+  * Respuesta exitosa (200 OK)
+  * Respuesta de error (500 Internal Server Error)
+
+4. Obtener salas de cine cercanas
+* Endpoint: /salasCercanas
+* Método: POST
+* Codigo de estado:
+  *200 OK: Sala de cine encontrada.
+  *500: Ocurrio un error en el servidor.
+* Respuesta:
+  * 200 OK: Devuelve un array de objetos que representan las salas de cine cercanas.
+  * 500 Internal Server Error: Si ocurre un error al procesar la solicitud.
           
 ## Diseño de la Página Web 🚀
 La página web podría tener las siguientes secciones:

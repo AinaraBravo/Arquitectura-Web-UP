@@ -42,47 +42,46 @@ bullets.forEach((bullet) => {
 });
 
 
+// En login.js
 const loginBtn = document.getElementById('login-btn');
 
 loginBtn.addEventListener('click', async () => {
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-  try {
-    const response = await fetch("http://localhost:4000/usuarios/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: username,
-        contrasenia: password
-      }),
-    });
+    try {
+        const response = await fetch("http://localhost:4000/usuarios/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: username,
+                contrasenia: password
+            }),
+        });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Error en la solicitud de inicio de sesión");
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Error en la solicitud de inicio de sesión");
+        }
+
+        const data = await response.json();
+        localStorage.setItem("token", data.token); // Almacena el token recibido
+        localStorage.setItem('userCorreo', username); // Asegúrate de almacenar el correo
+
+        // Redirige según el tipo de usuario
+        if (username === "rosie.love@example.com") {
+            window.location.href = 'admin.html'; 
+        } else {
+            window.location.href = 'inicio.html'; 
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert('Usuario o contraseña incorrectos. Inténtalo de nuevo.');
     }
-
-    const data = await response.json();
-    localStorage.setItem("token", data.token); // Almacena el token recibido
-    localStorage.setItem('isLoggedIn', 'true'); // Guarda el estado de sesión
-
-    // Verificar si el usuario es el administrador
-    if (username === "rosie.love@example.com") {
-      console.log("Redirigiendo a dashboard/admin.html"); // Debugging
-      window.location.href = 'admin.html'; // Redirige a la página del administrador
-  } else {
-      console.log("Redirigiendo a inicio.html"); // Debugging
-      window.location.href = 'inicio.html'; // Redirige a la página de inicio
-  }
-  
-  } catch (error) {
-    console.error("Error:", error);
-    alert('Usuario o contraseña incorrectos. Inténtalo de nuevo.');
-  }
 });
+
 
 
 
