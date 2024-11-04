@@ -37,12 +37,11 @@ Se trata de un sistema diseñado para ofrecer a los usuarios una experiencia com
 
 
 ## Manejo de los objetos con protocolo HTTP 🌐
-### Gestión de usuarios
-
+### Gestión de usuarios 
 1. Crear un nuevo usuario:
   - Endpoint: /usuarios
   - Método: POST
-  - Cuerpo: nombre,email, contrasenia
+  - Cuerpo: nombre,email, contrasenia,plan
   - Código de estado:
      - 201 Created: Si el usuario se crea correctamente.
      - 400 Bad Request: Si faltan datos o hay algún error de validación (por ejemplo, email ya existe).
