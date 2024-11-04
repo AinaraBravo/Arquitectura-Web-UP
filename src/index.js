@@ -71,11 +71,11 @@ app.get("/",(req,res)=>{
 
 
 /*SI LO APLICAMOS AUN EN EL FRONTEND*/
-app.get("/Peliculas", async (req, res) => {
+app.get("/peliculas", async (req, res) => {
     try {
         const connection = await database.getConnection();
         
-        // Consulta para obtener películas y sus plataformas disponibles
+        // Consulta para obtener películas, sus plataformas y salas disponibles
         const query = `
             SELECT 
                 p.id_pelicula,
@@ -84,13 +84,18 @@ app.get("/Peliculas", async (req, res) => {
                 p.año,
                 p.sinopsis,
                 p.duracion,
-                GROUP_CONCAT(po.nombre SEPARATOR ', ') AS plataformas
+                GROUP_CONCAT(DISTINCT po.nombre SEPARATOR ', ') AS plataformas,
+                GROUP_CONCAT(DISTINCT s.nombre SEPARATOR ', ') AS salas
             FROM 
                 Pelicula p
             LEFT JOIN 
                 Listado_Disponible_Por_Plataforma l ON p.id_pelicula = l.id_pelicula
             LEFT JOIN 
                 Plataforma_Online po ON l.id_plataforma_online = po.id_plataforma_online
+            LEFT JOIN 
+                listado_disponible_por_sala d ON p.id_pelicula = d.id_pelicula
+            LEFT JOIN 
+                Sala_De_Cine s ON d.id_sala_de_cine = s.id_sala_de_cine
             GROUP BY 
                 p.id_pelicula
         `;
@@ -106,7 +111,7 @@ app.get("/Peliculas", async (req, res) => {
 
 
 /*NO LO APLICAMOS AUN EN EL FRONTEND*/
-app.get("/Peliculas/nombre/:nombre", async (req, res) => {
+app.get("/peliculas/nombre/:nombre", async (req, res) => {
     const { nombre } = req.params; // Obtiene el nombre de la película de la URL
 
     try {
@@ -127,7 +132,7 @@ app.get("/Peliculas/nombre/:nombre", async (req, res) => {
 });
 
 /*NO LO APLICAMOS AUN EN EL FRONTEND*/
-app.get("/Peliculas/genero/:genero", async (req, res) => {
+app.get("/peliculas/genero/:genero", async (req, res) => {
     const { genero } = req.params; // Obtiene el genero desde la URL
     try {
         // Imprime el género buscado
@@ -155,7 +160,7 @@ app.get("/Peliculas/genero/:genero", async (req, res) => {
 });
 
 /*NO LO APLICAMOS AUN EN EL FRONTEND*/
-app.post("/Usuarios/:correo/favoritos", async (req, res) => {
+app.post("/usuarios/:correo/favoritos", async (req, res) => {
     const correo = req.params.correo; // Obtiene el correo del usuario desde la URL
     const { id_pelicula } = req.body; // Obtiene el ID de la película desde el cuerpo de la solicitud
 
@@ -195,8 +200,8 @@ app.post("/Usuarios/:correo/favoritos", async (req, res) => {
 
 
 /*NO LO APLICAMOS AUN EN EL FRONTEND*/
-app.get("/Usuarios/:email/favoritos", async (req, res) => {
-    const emailUser = req.params.email; // Obtiene el ID del usuario desde la URL
+app.get("/usuarios/:email/favoritos", async (req, res) => {
+    const emailUser = req.params.email; // Obtiene el email del usuario desde la URL
 
     try {
         const connection = await database.getConnection();
@@ -207,13 +212,33 @@ app.get("/Usuarios/:email/favoritos", async (req, res) => {
             return res.status(404).json({ message: "Usuario no encontrado" });
         }
 
-        // Obtiene las películas favoritas del usuario
+        // Obtiene las películas favoritas del usuario junto con su disponibilidad
         const [favoritos] = await connection.query(`
-            SELECT P.id_pelicula, P.titulo, P.genero, P.año, P.sinopsis, P.duracion 
-            FROM Favoritos F
-            JOIN Pelicula P ON F.id_pelicula = P.id_pelicula
-            JOIN Usuario U ON F.id_usuario = U.id_usuario
-            WHERE U.email = ?
+            SELECT 
+                P.id_pelicula, 
+                P.titulo, 
+                P.genero, 
+                P.año, 
+                P.sinopsis, 
+                P.duracion, 
+                GROUP_CONCAT(DISTINCT IF(D.id_sala IS NOT NULL, S.nombre, NULL) SEPARATOR ', ') AS salas,
+                GROUP_CONCAT(DISTINCT IF(D.id_plataforma IS NOT NULL, PL.nombre, NULL) SEPARATOR ', ') AS plataformas
+            FROM 
+                Favoritos F
+            JOIN 
+                Pelicula P ON F.id_pelicula = P.id_pelicula
+            LEFT JOIN 
+                Disponibilidad D ON P.id_pelicula = D.id_pelicula
+            LEFT JOIN 
+                Sala_De_Cine S ON D.id_sala = S.id_sala_de_cine  -- Aquí hacemos el JOIN con la tabla de salas
+            LEFT JOIN 
+                Plataforma_Online PL ON D.id_plataforma = PL.id_plataforma_online -- Aquí hacemos el JOIN con la tabla de plataformas
+            JOIN 
+                Usuario U ON F.id_usuario = U.id_usuario
+            WHERE 
+                U.email = ?
+            GROUP BY 
+                P.id_pelicula
         `, [emailUser]);
 
         // Si no hay favoritos, se puede devolver un mensaje claro
@@ -230,8 +255,9 @@ app.get("/Usuarios/:email/favoritos", async (req, res) => {
 });
 
 
+
 // Endpoint para obtener el ID del usuario basado en el correo
-app.get('/Usuarios/correo/:email', async (req, res) => {
+app.get('/usuarios/correo/:email', async (req, res) => {
     const email = req.params.email;
 
     try {
@@ -258,10 +284,10 @@ app.get('/Usuarios/correo/:email', async (req, res) => {
 
 /*SI LO APLICAMOS AUN EN EL FRONTEND*/
 app.post('/usuarios', async (req, res) => {
-    const { nombre, email, contrasenia, rol } = req.body;
+    const { nombre, email, contrasenia, rol,plan } = req.body;
 
     // Asegúrate de que los datos necesarios estén presentes
-    if (!nombre || !email || !contrasenia) {
+    if (!nombre || !email || !contrasenia || !plan) {
         return res.status(400).json({ message: "Faltan datos requeridos." });
     }
 
@@ -297,8 +323,8 @@ app.post('/usuarios', async (req, res) => {
         
         // Inserta el nuevo usuario
         await connection.query(
-            "INSERT INTO Usuario (nombre, email, contrasenia, rol) VALUES (?, ?, ?, ?)", 
-            [nombre, email, hashedPassword, rol || 'usuario'] // Asignar 'usuario' si no se proporciona rol
+            "INSERT INTO Usuario (nombre, email, contrasenia, rol,plan) VALUES (?, ?, ?, ?,?)", 
+            [nombre, email, hashedPassword, rol || 'usuario',plan] // Asignar 'usuario' si no se proporciona rol
         );
 
         res.status(201).json({ message: "Usuario creado con éxito." });
@@ -325,7 +351,7 @@ app.get('/usuarios', async (req, res) => {
 });
 
 // Endpoint para eliminar un usuario por email
-app.delete('/Usuarios/email/:email', async (req, res) => {
+app.delete('/usuarios/email/:email', async (req, res) => {
     const email = req.params.email;
     try {
         const connection = await database.getConnection(); // Asegúrate de que 'database' esté bien definido
@@ -342,7 +368,7 @@ app.delete('/Usuarios/email/:email', async (req, res) => {
     }
 });
 
-app.put('/Usuarios/email/:email', async (req, res) => {
+app.put('/usuarios/email/:email', async (req, res) => {
     const email = req.params.email;
     const { planNuevo } = req.body; // Captura el nuevo plan del cuerpo de la solicitud
 
@@ -365,11 +391,10 @@ app.put('/Usuarios/email/:email', async (req, res) => {
 
 
 /*SI LO APLICAMOS AUN EN EL FRONTEND*/
-app.put("/Peliculas/nombre/:nombre_pelicula", authenticateJWT, async (req, res) => {
-    const { nombre_pelicula } = req.params; // Obtener el nombre de la película desde la URL
-    const body = req.body; // Obtener el cuerpo completo de la solicitud
+app.put("/peliculas/nombre/:nombre_pelicula", authenticateJWT, async (req, res) => {
+    const { nombre_pelicula } = req.params;
+    const body = req.body;
 
-    // Lista de géneros válidos
     const generosValidos = ['Acción', 'Comedia', 'Drama', 'Terror', 'Ciencia Ficción', 'Aventura', 'Documental', 'Romance'];
 
     try {
@@ -381,7 +406,6 @@ app.put("/Peliculas/nombre/:nombre_pelicula", authenticateJWT, async (req, res) 
             return res.status(404).json({ message: "Película no encontrada." });
         }
 
-        // Crear objeto para almacenar los campos a actualizar
         const updates = {};
         if (body.titulo) updates.titulo = body.titulo;
         if (body.genero) {
@@ -390,36 +414,36 @@ app.put("/Peliculas/nombre/:nombre_pelicula", authenticateJWT, async (req, res) 
             }
             updates.genero = body.genero;
         }
-        
-        // Construir la consulta de actualización
+
         const setClauses = Object.keys(updates).map(key => `${key} = ?`).join(", ");
         const updateValues = Object.values(updates);
         if (updateValues.length > 0) {
             await connection.query(`UPDATE Pelicula SET ${setClauses} WHERE id_pelicula = ?`, [...updateValues, existingPelicula[0].id_pelicula]);
         }
 
-
-        // Actualizar plataformas
-        await connection.query("DELETE FROM Disponibilidad WHERE id_pelicula = ?", [existingPelicula[0].id_pelicula]);
-        if (body.plataformas && body.plataformas.length > 0) {
+        // Actualizar plataformas si están presentes en el cuerpo
+        if (body.plataformas) {
+            // Eliminar plataformas existentes para la película en la tabla de relaciones correctas
+            await connection.query("DELETE FROM Listado_Disponible_Por_Plataforma WHERE id_pelicula = ?", [existingPelicula[0].id_pelicula]);
             for (const plataforma of body.plataformas) {
-                await connection.query("INSERT INTO Disponibilidad (id_pelicula, id_plataforma) VALUES (?, ?)", [existingPelicula[0].id_pelicula, plataforma]);
+                await connection.query("INSERT INTO Listado_Disponible_Por_Plataforma (id_pelicula, id_plataforma_online) VALUES (?, ?)", [existingPelicula[0].id_pelicula, plataforma]);
             }
         }
 
-        // Actualizar salas de cine
-        if (body.salas_de_cine && body.salas_de_cine.length > 0) {
+        // Actualizar salas de cine si están presentes en el cuerpo
+        if (body.salas_de_cine) {
+            // Eliminar salas existentes para la película en la tabla de relaciones correctas
+            await connection.query("DELETE FROM Listado_Disponible_Por_Sala WHERE id_pelicula = ?", [existingPelicula[0].id_pelicula]);
             for (const sala of body.salas_de_cine) {
                 const idSala = parseInt(sala.trim());
                 if (!isNaN(idSala) && idSala > 0) {
-                    await connection.query("INSERT INTO Disponibilidad (id_pelicula, id_sala) VALUES (?, ?)", [existingPelicula[0].id_pelicula, idSala]);
+                    await connection.query("INSERT INTO Listado_Disponible_Por_Sala (id_pelicula, id_sala_de_cine) VALUES (?, ?)", [existingPelicula[0].id_pelicula, idSala]);
                 } else {
                     console.warn(`ID de sala inválido: ${sala}`);
                 }
             }
         }
 
-        // Devolver la respuesta exitosa
         res.status(200).json({ message: "Película actualizada exitosamente." });
 
     } catch (error) {
@@ -427,6 +451,8 @@ app.put("/Peliculas/nombre/:nombre_pelicula", authenticateJWT, async (req, res) 
         res.status(500).json({ message: "Ocurrió un error interno en el servidor." });
     }
 });
+
+
 
 
 /*NO LO APLICAMOS AUN EN EL FRONTEND*/
@@ -474,7 +500,7 @@ app.put('/usuarios/:email/cambiar-contrasenia', async (req, res) => {
 const JWT_SECRET = 'tu_clave_secreta'; // Cambia esto a una clave segura
 
 /*SI LO APLICAMOS AUN EN EL FRONTEND*/
-app.post('/login', async (req, res) => {
+app.post('/usuarios/login', async (req, res) => {
     const { email, contrasenia } = req.body; // Verifica que el cuerpo de la solicitud tenga los campos correctos
 
     if (!email || !contrasenia) {
@@ -526,7 +552,7 @@ app.post('/login', async (req, res) => {
 
 
 /*NO LO APLICAMOS AUN EN EL FRONTEND*/
-app.post("/Peliculas/:id/calificar", async (req, res) => {
+app.post("/peliculas/:id/calificar", async (req, res) => {
     const { id } = req.params;
     const { calificacion } = req.body;
 
@@ -560,7 +586,7 @@ app.post("/Peliculas/:id/calificar", async (req, res) => {
 });
 
 /*SI LO APLICAMOS AUN EN EL FRONTEND*/
-app.post("/Peliculas/:id/comentarios", async (req, res) => {
+app.post("/peliculas/:id/comentarios", async (req, res) => {
     const { id } = req.params; // ID de la película
     const { comentario } = req.body; // Comentario enviado por el usuario
 
@@ -596,7 +622,7 @@ app.post("/Peliculas/:id/comentarios", async (req, res) => {
 });
 
 /*NO LO APLICAMOS AUN EN EL FRONTEND*/
-app.get("/Peliculas/mejores-calificaciones/:anio", async (req, res) => {
+app.get("/peliculas/mejores-calificaciones/:anio", async (req, res) => {
     const { anio } = req.params; // Obtiene el año de la URL
 
     try {
@@ -625,7 +651,7 @@ app.get("/Peliculas/mejores-calificaciones/:anio", async (req, res) => {
 });
 
 /*NO LO APLICAMOS AUN EN EL FRONTEND*/
-app.get("/Peliculas/:id/comentarios", async (req, res) => {
+app.get("/peliculas/:id/comentarios", async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -648,11 +674,11 @@ app.get("/Peliculas/:id/comentarios", async (req, res) => {
 
 
 /*SI LO APLICAMOS AUN EN EL FRONTEND*/
-app.post("/Peliculas", authenticateJWT, async (req, res) => {
+app.post("/peliculas", authenticateJWT, async (req, res) => {
     let { titulo, genero, año, actores, sinopsis, duracion, plataformas = [], salas_de_cine = [] } = req.body;
 
     // Lista de géneros válidos
-    const generosValidos = ['Acción', 'Comedia', 'Drama', 'Terror', 'Ciencia Ficción', 'Aventura', 'Documental', 'Romance'];
+    const generosValidos = ['Accion', 'Comedia', 'Drama', 'Terror', 'Ciencia Ficcion', 'Aventura', 'Documental', 'Romance','Fantasia'];
 
     // Verificar que todos los campos obligatorios estén presentes
     if (!titulo || !genero || !año || !actores || !sinopsis || !duracion) {
@@ -672,9 +698,11 @@ app.post("/Peliculas", authenticateJWT, async (req, res) => {
     }
 
     // Validar que el género esté en la lista de géneros válidos
+    // Validar que el género esté en la lista de géneros válidos
     if (!generosValidos.includes(genero)) {
         return res.status(400).json({ message: `El género debe ser uno de los siguientes: ${generosValidos.join(', ')}.` });
     }
+
 
     try {
         const connection = await database.getConnection();
@@ -691,6 +719,26 @@ app.post("/Peliculas", authenticateJWT, async (req, res) => {
             [titulo, genero, año, sinopsis, duracion]
         );
 
+        // Después de insertar la película
+        // Inserta disponibilidad en la tabla Disponibilidad
+        if (plataformas && plataformas.length > 0) {
+            for (const plataforma of plataformas) {
+                // Aquí se asume que 'plataforma' es el ID de la plataforma existente
+                await connection.query(
+                    "INSERT INTO Disponibilidad (id_pelicula, id_plataforma) VALUES (?, ?)",
+                    [result.insertId, plataforma] // Asegúrate que 'plataforma' es el ID correcto
+                );
+                // Inserta en Listado_Disponible_Por_Plataforma
+                await connection.query(
+                    "INSERT INTO Listado_Disponible_Por_Plataforma (id_pelicula, id_plataforma_online) VALUES (?, ?)",
+                    [result.insertId, plataforma] // Asumiendo que 'plataforma' es el ID de la plataforma online
+                );
+            }
+        }
+    
+
+
+    
         // Inserta actores en la tabla intermedia
         for (const actor of actores) {
             const [existingActor] = await connection.query("SELECT * FROM Actor WHERE nombre = ?", [actor]);
@@ -722,17 +770,6 @@ app.post("/Peliculas", authenticateJWT, async (req, res) => {
             }
         }
 
-        // Insertar disponibilidad en la tabla Disponibilidad
-        // Inserta plataformas si existen
-        if (plataformas && plataformas.length > 0) {
-            for (const plataforma of plataformas) {
-                await connection.query(
-                    "INSERT INTO Disponibilidad (id_pelicula, id_plataforma) VALUES (?, ?)",
-                    [result.insertId, plataforma] // Aquí asume que plataforma es el ID
-                );
-            }
-        }
-
         // Inserta salas de cine si existen
         // Inserta salas de cine si existen y son válidas
         if (salas_de_cine && salas_de_cine.length > 0) {
@@ -743,8 +780,14 @@ app.post("/Peliculas", authenticateJWT, async (req, res) => {
                         "INSERT INTO Disponibilidad (id_pelicula, id_sala) VALUES (?, ?)",
                         [result.insertId, idSala]
                     );
+                    // Inserta en listado_disponible_por_sala
+                    await connection.query(
+                    "INSERT INTO listado_disponible_por_sala (id_pelicula, id_sala_de_cine) VALUES (?, ?)",
+                    [result.insertId, idSala] // Asumiendo que 'plataforma' es el ID de la plataforma online
+                    );
                 } else {
                     console.warn(`ID de sala inválido: ${sala}`); // Advertencia para IDs inválidos
+ // Advertencia para IDs inválidos
                 }
             }
         } else {
@@ -774,7 +817,7 @@ app.post("/Peliculas", authenticateJWT, async (req, res) => {
 
 
 /*SI LO APLICAMOS AUN EN EL FRONTEND*/
-app.delete("/Peliculas/nombre/:nombre_pelicula", authenticateJWT, async (req, res) => {
+app.delete("/peliculas/nombre/:nombre_pelicula", authenticateJWT, async (req, res) => {
     const nombre_pelicula = req.params.nombre_pelicula.trim(); // Elimina espacios en blanco
 
     let connection; // Definir la variable de conexión aquí
@@ -853,7 +896,7 @@ app.get("/peliculas/actor/:nombre", async (req, res) => {
 
 
 /*NO LO APLICAMOS AUN EN EL FRONTEND*/
-app.get("/Peliculas/:id/disponibilidad", async (req, res) => {
+app.get("/peliculas/:id/disponibilidad", async (req, res) => {
     const { id } = req.params; // Obtiene el ID de la película de la URL
 
     try {
@@ -891,11 +934,13 @@ app.get("/plataformas", async (req, res) => {
 
 
 
-/*NO LO APLICAMOS AUN EN EL FRONTEND*/
+/*SI LO APLICAMOS AUN EN EL FRONTEND*/
 app.get("/salas", async (req, res) => {
     try {
         const connection = await database.getConnection();
-        const [salas] = await connection.query("SELECT direccion, nombre, barrio FROM Sala_De_Cine");
+        const [salas] = await connection.query(
+            "SELECT MIN(id_sala_de_cine) AS id_sala_de_cine, MIN(direccion) AS direccion, nombre FROM Sala_De_Cine GROUP BY nombre"
+        );
         res.json(salas);
     } catch (error) {
         console.error("Error al obtener salas de cine:", error);
@@ -904,33 +949,12 @@ app.get("/salas", async (req, res) => {
 });
 
 
+
+
 const apiKey = 'pk.d3a2ba95ea88dcdcfbe3e45acb0c9f19'; // Reemplaza con tu clave real
 
-/*app.post('/buscar-direccion', async (req, res) => {
-    const { address } = req.body; // Obtiene la dirección del cuerpo de la solicitud
 
-    if (!address) {
-        return res.status(400).json({ error: 'Se requiere una dirección.' });
-    }
-
-    try {
-        const response = await axios.get('https://us1.locationiq.com/v1/search.php', {
-            params: {
-                key: apiKey,
-                q: address,
-                format: 'json'
-            }
-        });
-
-        // Devuelve los datos obtenidos de la API
-        res.status(200).json(response.data);
-    } catch (error) {
-        console.error('Error al obtener la ubicación:', error);
-        res.status(500).json({ error: 'Error al obtener la ubicación.' });
-    }
-});*/
-
-app.post('/Salas', async (req, res) => {
+app.post('/salas', async (req, res) => {
     const { nombre, direccion, url } = req.body;
     const apiKey = 'pk.d3a2ba95ea88dcdcfbe3e45acb0c9f19';
 
@@ -974,7 +998,7 @@ app.post('/Salas', async (req, res) => {
 
 
 /*SI LO APLICAMOS AUN EN EL FRONTEND*/
-app.delete('/Salas', async (req, res) => {
+app.delete('/salas', async (req, res) => {
     const { nombre, direccion } = req.body;
 
     if (!nombre || !direccion) {
@@ -1008,27 +1032,9 @@ app.delete('/Salas', async (req, res) => {
     }
 });
 
-/*NO LO APLICAMOS AUN EN EL FRONTEND*/
-/*app.post('/SalasCercanas', async (req, res) => {
-    const { lat, lon } = req.body;
 
-    try {
-        const connection = await database.getConnection();
-        const [salas] = await connection.query('SELECT * FROM Sala_De_Cine'); // Cambia esto por tu consulta real
-
-        const salasCercanas = salas.map(sala => {
-            const distancia = calcularDistancia(lat, lon, sala.latitud, sala.longitud);
-            return { ...sala, distancia };
-        }).filter(sala => sala.distancia <= 5); // Filtra las salas dentro de 5 km
-
-        res.json(salasCercanas);
-    } catch (error) {
-        console.error('Error al obtener salas:', error);
-        res.status(500).json({ error: 'Error al obtener salas' });
-    }
-});*/
-
-app.post('/SalasCercanas', async (req, res) => {
+/*SI LO APLICAMOS AUN EN EL FRONTEND*/
+app.post('/salasCercanas', async (req, res) => {
     const { lat, lon } = req.body;
 
     try {
@@ -1042,18 +1048,27 @@ app.post('/SalasCercanas', async (req, res) => {
             LEFT JOIN Pelicula p ON d.id_pelicula = p.id_pelicula
         `);
 
-        const salasCercanas = salas.map(sala => {
-            const distancia = calcularDistancia(lat, lon, sala.latitud, sala.longitud);
-            return { 
-                ...sala, 
-                distancia, 
-                peliculas: salas
-                    .filter(p => p.id_sala_de_cine === sala.id_sala_de_cine && p.titulo)
-                    .map(p => ({titulo: p.titulo, sinopsis: p.sinopsis}))
-            };
-        }).filter(sala => sala.distancia <= 5);
+        const salasCercanas = {};
 
-        res.json(salasCercanas);
+        salas.forEach(sala => {
+            const distancia = calcularDistancia(lat, lon, sala.latitud, sala.longitud);
+            if (distancia <= 5) { // Filtra solo las salas cercanas
+                if (!salasCercanas[sala.nombre]) { // Asegúrate de que el nombre no esté duplicado
+                    salasCercanas[sala.nombre] = {
+                        ...sala,
+                        distancia,
+                        peliculas: [] // Inicializa un array para las películas
+                    };
+                }
+                // Agrega la película a la sala
+                if (sala.titulo) {
+                    salasCercanas[sala.nombre].peliculas.push({titulo: sala.titulo, sinopsis: sala.sinopsis});
+                }
+            }
+        });
+
+        // Convierte el objeto de salas a un array
+        res.json(Object.values(salasCercanas));
     } catch (error) {
         console.error('Error al obtener salas:', error);
         res.status(500).json({ error: 'Error al obtener salas' });
@@ -1061,9 +1076,8 @@ app.post('/SalasCercanas', async (req, res) => {
 });
 
 
-
 /*SI LO APLICAMOS AUN EN EL FRONTEND*/
-app.post('/Plataformas', async (req, res) => {
+app.post('/plataformas', async (req, res) => {
     const { nombre } = req.body;
 
     if (!nombre) {
@@ -1082,7 +1096,7 @@ app.post('/Plataformas', async (req, res) => {
 });
 
 /*SI LO APLICAMOS AUN EN EL FRONTEND*/
-app.delete('/Plataformas', async (req, res) => {
+app.delete('/plataformas', async (req, res) => {
     const { nombre } = req.body;
 
     if (!nombre) {
@@ -1104,7 +1118,7 @@ app.delete('/Plataformas', async (req, res) => {
     }
 });
 
-app.get('/Plataformas', async (req, res) => {
+app.get('/plataformas', async (req, res) => {
     try {
         const connection = await database.getConnection();
         const [results] = await connection.query('SELECT * FROM Plataforma_Online');
