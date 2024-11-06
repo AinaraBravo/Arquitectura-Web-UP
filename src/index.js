@@ -451,7 +451,7 @@ app.put("/peliculas/nombre/:nombre_pelicula", authenticateJWT, async (req, res) 
 
 
 /*SI LO APLICAMOS AUN EN EL FRONTEND*/
-app.put('/usuarios/:email/cambiar-contrasenia', async (req, res) => {
+app.put('/usuarios/:email/contrasenia', async (req, res) => {
     const { email } = req.params; // Obtiene el email del usuario desde la URL
     const { nueva_contrasenia } = req.body; // Obtiene la nueva contraseña desde el cuerpo de la solicitud
 
@@ -612,35 +612,6 @@ app.post("/peliculas/:id/comentarios", async (req, res) => {
     } catch (err) {
         console.error("Error al registrar el comentario:", err);
         res.status(500).json({ message: "Error al registrar el comentario." });
-    }
-});
-
-/*NO LO APLICAMOS AUN EN EL FRONTEND*/
-app.get("/peliculas/mejores-calificaciones/:anio", async (req, res) => {
-    const { anio } = req.params; // Obtiene el año de la URL
-
-    try {
-        const connection = await database.getConnection();
-
-        // Consulta para obtener las películas mejor calificadas del año específico
-        const [result] = await connection.query(`
-            SELECT p.titulo, p.genero, p.año, AVG(c.calificacion) AS promedio_calificacion
-            FROM Pelicula p
-            JOIN Calificaciones c ON p.id_pelicula = c.id_pelicula
-            WHERE YEAR(c.fecha) = ?
-            GROUP BY p.id_pelicula
-            ORDER BY promedio_calificacion DESC
-            LIMIT 5
-        `, [anio]);
-
-        if (result.length === 0) {
-            return res.status(404).json({ message: "No se encontraron películas para el año especificado." });
-        }
-
-        res.json(result); // Devuelve las películas con su calificación promedio
-    } catch (err) {
-        console.error("Error al obtener las mejores calificaciones:", err);
-        res.status(500).json({ message: "Ocurrió un error interno en el servidor." });
     }
 });
 
